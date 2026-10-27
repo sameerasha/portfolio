@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth dark">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#07090e" />
+    <script>
+      (function() {
+        const pref = localStorage.getItem('theme-preference');
+        if (pref === 'light') {
+          document.documentElement.classList.add('light');
+          document.documentElement.classList.remove('dark');
+          document.documentElement.style.colorScheme = 'light';
+        } else {
+          document.documentElement.classList.add('dark');
+          document.documentElement.classList.remove('light');
+          document.documentElement.style.colorScheme = 'dark';
+        }
+      })();
+    </script>
+    
+    <!-- Primary Meta Tags -->
+    <title>Rabinarayan Asha | Senior Java & Microservices Developer Portfolio</title>
+    <meta name="title" content="Rabinarayan Asha | Senior Java & Microservices Developer Portfolio" />
+    <meta name="description" content="Portfolio of Rabinarayan Asha, Technology Analyst at Infosys with 4.9+ years experience specializing in Java 11, Spring Boot, Apache Kafka, Microservices, Hibernate, and React.js." />
+    <meta name="keywords" content="Rabinarayan Asha, Java Developer, Spring Boot, Apache Kafka, Microservices, React.js, Hibernate, Infosys, Full Stack Developer, Software Engineer" />
+    <meta name="author" content="Rabinarayan Asha" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Rabinarayan Asha | Senior Java & Microservices Developer Portfolio" />
+    <meta property="og:description" content="Engineering Scalable Systems. Building Event-Driven Microservices. Interactive 3D portfolio of Rabinarayan Asha." />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:title" content="Rabinarayan Asha | Senior Java & Microservices Developer Portfolio" />
+    <meta property="twitter:description" content="Engineering Scalable Systems. Building Event-Driven Microservices." />
+  </head>
+  <body class="antialiased selection:bg-sky-500/30 selection:text-sky-200 transition-colors duration-300 dark:bg-[#07090e] bg-slate-50 dark:text-slate-100 text-slate-900">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
