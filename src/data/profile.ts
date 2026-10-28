@@ -471,119 +471,133 @@ POST /api/notifications/email      -> 200 OK (SendGrid email dispatch)`,
     ports: ["3306:3306"]`,
     },
     {
-      id: 'automated-cicd-kubernetes-pipeline',
-      title: 'Automated CI/CD & Kubernetes Cloud Pipeline',
-      tagline: 'End-to-end automation with Jenkins, Maven, Docker, and Kubernetes deployment.',
-      category: 'DevOps & Cloud Infrastructure',
+      id: 'aws-3tier-springboot-microservices',
+      title: 'Production-Ready AWS 3-Tier Architecture for Spring Boot Microservices',
+      tagline: 'Multi-AZ enterprise cloud architecture with React TypeScript, Spring Boot 3, Amazon EKS, PostgreSQL, and Terraform.',
+      category: 'AWS Cloud & Kubernetes Architecture',
       status: 'Production System',
-      role: 'DevOps / Backend Integration',
-      teamSize: 25,
-      duration: 'Ongoing Architecture',
+      role: 'Senior AWS Cloud & Microservices Architect',
+      teamSize: 20,
+      duration: 'Enterprise Cloud Architecture',
       overview:
-        'A resilient enterprise CI/CD automation and container orchestration pipeline powering multi-service Spring Boot and React applications with automated test execution, static code analysis, Docker image packaging, and Kubernetes deployment.',
+        'A secure, scalable, highly available production-ready AWS 3-tier architecture separating presentation (React TypeScript SPA on S3 + CloudFront with OAC), application (Spring Boot 3 microservices on Amazon EKS in private subnets with Karpenter autoscaling), and data tiers (Amazon RDS for PostgreSQL Multi-AZ and ElastiCache for Redis in isolated database subnets).',
       problemStatement:
-        'Deploying distributed microservices manually introduces human error, deployment downtime, undetected regressions, and inconsistent environment configurations across DEV, SIT, and UAT stages.',
+        'Modern enterprise microservices require physical multi-tier network isolation, automated scaling during seasonal surges, zero credential leakage, and seamless CI/CD delivery without exposing database or application nodes directly to the public internet.',
       proposedSolution:
-        'Architected an automated delivery pipeline using Jenkins, Maven, Docker, and Kubernetes. Integrates SonarLint code quality gates, automated Mockito/JUnit test execution, and Dynatrace APM telemetry for continuous health verification.',
+        'Architected a 3-tier AWS architecture across 2 Availability Zones (public subnets for ALB/NAT, private app subnets for EKS worker nodes, private database subnets for RDS/Redis). Integrated AWS WAF, Route 53, CloudFront OAC, AWS Load Balancer Controller, AWS Secrets Manager automated rotation, and end-to-end GitHub Actions CI/CD.',
       keyFeatures: [
-        'Automated Test Verification: Executes Maven Surefire test suites with JUnit and Mockito on every commit.',
-        'SonarLint & Quality Assurance: Enforces code quality, security rules, and code smell thresholds before staging.',
-        'Multi-Stage Docker Packaging: Produces lightweight, secure container images.',
-        'Kubernetes Cluster Orchestration: Deploys containerized pods with rolling updates, service discovery, and health probes.',
-        'Application Performance Telemetry: Integrated with Dynatrace APM for real-time latency and trace monitoring.',
+        'Tier 1: Presentation Tier — React.js TypeScript SPA compiled and hosted on private Amazon S3, distributed globally via CloudFront with Origin Access Control (OAC), ACM TLS 1.3, and AWS WAF bot mitigation.',
+        'Tier 2: Application Tier — Autonomous Spring Boot 3 / Java 21 microservices (Auth, User, Order, Notification, File Manager) containerized with Docker, deployed on Amazon EKS with Karpenter auto-scaling and IAM Roles for Service Accounts (IRSA).',
+        'Tier 3: Data Tier — Amazon RDS for PostgreSQL in isolated private database subnets with Multi-AZ automated failover, KMS encryption at rest and in transit, and automated 30-day credential rotation via AWS Secrets Manager.',
+        'High-Speed Caching & Asynchronous Messaging — Amazon ElastiCache for Redis cluster for hot session cache; Amazon SQS FIFO and SNS fan-out for decoupled event-driven processing.',
+        'Infrastructure as Code (IaC) — Modular Terraform codebase managing VPC, subnets, EKS, ALB, RDS, and security groups with remote S3 backend state locking.',
       ],
       architectureOverview:
-        'Declarative pipeline: Git Commit -> Jenkins Pipeline -> Maven Build & Mockito Tests -> SonarLint Quality Gate -> Docker Build -> Kubernetes Cluster Rolling Deployment -> Dynatrace Telemetry.',
+        'Multi-AZ 3-Tier Pipeline: Client -> Route 53 -> CloudFront/S3 (Frontend) | API Path (/api/v1/*) -> AWS WAF -> ALB (Public Subnet) -> Amazon EKS Spring Boot Pods (Private App Subnet) -> Amazon RDS PostgreSQL & ElastiCache Redis (Private DB Subnet) -> SQS/SNS -> CloudWatch & X-Ray APM.',
       architectureComponents: [
         {
-          name: 'Source Version Control',
-          type: 'infra',
-          tech: 'Git, GitHub, SVN',
-          role: 'Manages multi-branch development, pull request verification, and commit triggers.',
+          name: 'Presentation Tier (CloudFront + S3)',
+          type: 'frontend',
+          tech: 'React 19, TypeScript, CloudFront OAC, Route 53, ACM',
+          role: 'Serves static SPA assets with edge caching, sub-millisecond CDN delivery, and HTTPS redirection.',
         },
         {
-          name: 'Jenkins CI/CD Automation',
+          name: 'Application Load Balancer (ALB)',
+          type: 'gateway',
+          tech: 'AWS ALB, Ingress Controller, AWS WAF',
+          role: 'Terminates TLS 1.3, applies WAF rate limits, and routes API requests to EKS target groups.',
+        },
+        {
+          name: 'Application Tier (Amazon EKS)',
           type: 'service',
-          tech: 'Jenkins Pipeline, Maven',
-          role: 'Orchestrates build automation, compiles Java 11 artifacts, runs test suites, manages artifacts.',
+          tech: 'Spring Boot 3, Java 21, Kubernetes 1.30, Docker, Helm',
+          role: 'Orchestrates containerized microservices (Auth, User, Order, Notification, File) with HPA and Karpenter.',
         },
         {
-          name: 'Containerization Engine',
+          name: 'Data Tier (Amazon RDS PostgreSQL)',
+          type: 'database',
+          tech: 'PostgreSQL 16, Multi-AZ Standby, Flyway, HikariCP',
+          role: 'ACID transactional persistence in isolated database subnets with point-in-time recovery and KMS encryption.',
+        },
+        {
+          name: 'In-Memory Cache (Amazon ElastiCache)',
           type: 'infra',
-          tech: 'Docker Engine',
-          role: 'Builds immutable container images with isolated dependencies and minimal attack surfaces.',
+          tech: 'Redis 7.2 Cluster, Spring Data Redis',
+          role: 'Sub-millisecond caching for computational entities, session state, and distributed rate limiting.',
         },
         {
-          name: 'Orchestration & Runtime',
-          type: 'infra',
-          tech: 'Kubernetes (K8s)',
-          role: 'Manages container lifecycles, load balancing, liveness/readiness probes, and self-healing pods.',
-        },
-        {
-          name: 'Observability & Monitoring',
-          type: 'service',
-          tech: 'Dynatrace APM, Confluent Control Center',
-          role: 'Monitors real-time service health, transaction tracing, and resource utilization across nodes.',
+          name: 'Asynchronous Messaging (SQS & SNS)',
+          type: 'broker',
+          tech: 'AWS SQS FIFO, Amazon SNS, EventBridge',
+          role: 'Decouples order processing and notification workflows with dead-letter queue (DLQ) fault tolerance.',
         },
       ],
       techStack: {
-        backend: ['Java 11', 'Maven', 'Spring Boot'],
-        frontend: ['React Build Tools', 'Node.js'],
-        infrastructure: ['Docker', 'Kubernetes', 'AWS'],
-        testing: ['JUnit', 'Mockito', 'SonarLint'],
-        devops: ['Jenkins CI/CD', 'Git', 'Jira', 'Dynatrace'],
+        backend: ['Java 21', 'Spring Boot 3', 'Spring Security (JWT)', 'Spring Data JPA', 'Hibernate', 'Flyway', 'Maven'],
+        frontend: ['React.js', 'TypeScript', 'Tailwind CSS', 'Redux Toolkit', 'Axios', 'Jest'],
+        database: ['Amazon RDS for PostgreSQL 16', 'Amazon ElastiCache for Redis', 'Amazon S3 Data Lake'],
+        infrastructure: ['Amazon EKS (Kubernetes)', 'Amazon VPC (Multi-AZ)', 'ALB', 'CloudFront (OAC)', 'Route 53', 'AWS WAF', 'AWS Secrets Manager', 'Terraform'],
+        testing: ['JUnit 5', 'Mockito', 'SonarQube Quality Gate', 'EKS Health Probes'],
+        devops: ['GitHub Actions CI/CD', 'Helm Charts', 'Amazon ECR', 'Docker Multi-stage', 'CloudWatch', 'AWS X-Ray'],
       },
       implementationHighlights: [
-        'Automated Quality Gate: Commits failing unit tests or SonarLint security checks are automatically halted in Jenkins, preventing bad code from reaching SIT or UAT.',
-        'Zero-Downtime Rolling Updates: Kubernetes deployment manifests leverage rolling update strategies with configured readiness probes to maintain continuous service availability.',
-        'APM Telemetry: Dynatrace integration pinpoints inter-service communication latency and database query bottlenecks in real time.',
+        'Complete Multi-AZ Network Isolation: One VPC (10.0.0.0/16) across 2 AZs with public subnets (ALB, NAT), private application subnets (EKS), and strictly isolated private database subnets without internet routes.',
+        'Zero-Credential Architecture: Pods authenticate with AWS services using IAM Roles for Service Accounts (IRSA); database credentials rotate automatically every 30 days via AWS Secrets Manager.',
+        'Automated CI/CD with GitOps: GitHub Actions executes Maven unit tests, SonarQube quality gates, Docker multi-stage builds, ECR vulnerability scanning, and automated Helm upgrades on EKS.',
       ],
       testingStrategy: [
-        'Automated pre-merge verification running complete unit and slice test suites.',
-        'Smoke testing of deployed Kubernetes pods against `/actuator/health` endpoints.',
+        'Automated pre-merge unit and slice tests with JUnit 5 and Mockito.',
+        'Container vulnerability scanning with Trivy/ECR before deployment.',
+        'Kubernetes rolling update smoke testing against Spring Boot Actuator `/actuator/health` probes.',
       ],
       setupInstructions: {
-        prerequisites: ['Jenkins Server', 'Docker Engine', 'Kubectl configured for cluster'],
+        prerequisites: ['AWS CLI v2 & configured credentials', 'Terraform >= 1.9', 'Kubectl & Helm v3', 'Docker Engine'],
         steps: [
-          'Configure Jenkinsfile pipeline definition in the project root.',
-          'Set up webhook triggers on GitHub/Git repository.',
-          'Configure Kubernetes service account credentials in Jenkins secret store.',
-          'Trigger pipeline to observe automated build, test, and container push.',
+          'Deploy multi-tier VPC and networking via Terraform: `cd terraform/environments/prod && terraform apply`.',
+          'Build and push Spring Boot container images to Amazon ECR: `docker build -t $ECR_REGISTRY/order-service:v1 . && docker push`.',
+          'Deploy application Helm charts to EKS: `helm upgrade --install microservices ./helm/microservices -n production`.',
+          'Deploy React SPA frontend to private S3 and invalidate CloudFront: `aws s3 sync dist/ s3://prod-web-bucket && aws cloudfront create-invalidation --paths "/*"`.',
+          'Verify end-to-end telemetry via CloudWatch Container Insights and AWS X-Ray service maps.',
         ],
-        runCommand: 'mvn clean verify && docker build -t service:latest .',
+        runCommand: 'terraform apply -auto-approve && helm upgrade --install microservices ./helm',
       },
-      endpointsSnippet: `Pipeline Deployment Sequence:
-1. Stage: Checkout Code from Git
-2. Stage: Maven Compile & Mockito Unit Tests
-3. Stage: SonarLint Quality & Security Gate
-4. Stage: Docker Multi-stage Container Build
-5. Stage: Deploy to Kubernetes Cluster (Rolling Update)
-6. Stage: Dynatrace Health & Latency Verification`,
+      endpointsSnippet: `Presentation & API Ingress Routes:
+GET  https://domain.com/                    -> 200 OK (CloudFront OAC -> React SPA on S3)
+POST https://domain.com/api/v1/auth/login   -> 200 OK (Auth Service -> JWT Token Issued)
+GET  https://domain.com/api/v1/users/me     -> 200 OK (User Service -> Authenticated Profile)
+POST https://domain.com/api/v1/orders       -> 201 Created (Order Service -> RDS Commit + SQS Event)
+POST https://domain.com/api/v1/files/upload -> 200 OK (File Service -> S3 Pre-signed URL)
+GET  https://domain.com/actuator/health     -> 200 OK (Liveness/Readiness: RDS & Redis UP)`,
       dockerComposeSnippet: `apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: microservice-deployment
+  name: order-service
+  namespace: production
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: microservice
+      app: order-service
   template:
     metadata:
       labels:
-        app: microservice
+        app: order-service
     spec:
+      serviceAccountName: order-service-sa
       containers:
-      - name: app
-        image: app-service:latest
-        ports:
-        - containerPort: 8080
-        readinessProbe:
-          httpGet:
-            path: /actuator/health
-            port: 8080
-          initialDelaySeconds: 15
-          periodSeconds: 10`,
+        - name: order-service
+          image: 123456789012.dkr.ecr.us-east-1.amazonaws.com/order-service:latest
+          ports:
+            - containerPort: 8080
+          resources:
+            requests: { cpu: "250m", memory: "512Mi" }
+            limits: { cpu: "1000m", memory: "1024Mi" }
+          readinessProbe:
+            httpGet: { path: /actuator/health/readiness, port: 8080 }
+            initialDelaySeconds: 20
+          livenessProbe:
+            httpGet: { path: /actuator/health/liveness, port: 8080 }
+            initialDelaySeconds: 30`,
     },
   ],
 

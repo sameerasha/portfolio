@@ -23,7 +23,5 @@ dist-ssr
 *.sln
 *.sw?
 
-# Agent configuration and artifacts
-.agent/
-.agent
-
+# Heavy media assets
+*.mp4
