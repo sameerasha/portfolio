@@ -1,6 +1,6 @@
 import { useState, useRef, useMemo, useEffect } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
-import { Float, OrbitControls, Html } from '@react-three/drei';
+import { Float, OrbitControls, Html, Sparkles } from '@react-three/drei';
 import * as THREE from 'three';
 import {
   Activity,
@@ -856,7 +856,7 @@ function ArchitecturalNode3D({
         >
           <MinimalRoundIcon
             nodeId={node.id}
-            size={isSelected ? 'lg' : isHovered ? 'md' : 'md'}
+            size={isSelected ? 'md' : isHovered ? 'md' : 'sm'}
             isLight={isLight}
             isSelected={isSelected}
             isHovered={isHovered}
@@ -965,19 +965,29 @@ function AtmosphericDust({ isLight }: { isLight: boolean }) {
   });
 
   return (
-    <points ref={pointsRef}>
-      <bufferGeometry>
-        <bufferAttribute attach="attributes-position" args={[positions, 3]} />
-        <bufferAttribute attach="attributes-color" args={[colors, 3]} />
-      </bufferGeometry>
-      <pointsMaterial
-        size={0.038}
-        vertexColors
-        transparent
-        opacity={isLight ? 0.4 : 0.65}
-        depthWrite={false}
+    <group>
+      <Sparkles
+        count={85}
+        scale={[14, 9, 10]}
+        size={isLight ? 2.0 : 2.8}
+        speed={0.35}
+        opacity={isLight ? 0.35 : 0.65}
+        color={isLight ? '#0284c7' : '#38bdf8'}
       />
-    </points>
+      <points ref={pointsRef}>
+        <bufferGeometry>
+          <bufferAttribute attach="attributes-position" args={[positions, 3]} />
+          <bufferAttribute attach="attributes-color" args={[colors, 3]} />
+        </bufferGeometry>
+        <pointsMaterial
+          size={0.038}
+          vertexColors
+          transparent
+          opacity={isLight ? 0.4 : 0.65}
+          depthWrite={false}
+        />
+      </points>
+    </group>
   );
 }
 
@@ -986,84 +996,140 @@ function AtmosphericDust({ isLight }: { isLight: boolean }) {
  */
 function SceneCameraManager({
   cameraPreset,
+  presetKey,
   isAutoRotating,
   burstActive,
-  zoomAction,
+  zoomTrigger,
   focusedPosition,
-  onResetComplete,
+  resetSignal,
 }: {
   cameraPreset: 'default' | 'isometric' | 'top' | 'front';
+  presetKey: number;
   isAutoRotating: boolean;
   burstActive: boolean;
-  zoomAction: number;
+  zoomTrigger: { dir: 'in' | 'out'; id: number } | null;
   focusedPosition: [number, number, number] | null;
-  onResetComplete?: () => void;
+  resetSignal: number;
 }) {
   const controlsRef = useRef<any>(null);
   const { camera } = useThree();
   const targetCamPos = useRef<THREE.Vector3 | null>(null);
   const targetLookAt = useRef<THREE.Vector3>(new THREE.Vector3(0, 0, 0));
+  const targetDistanceRef = useRef<number | null>(null);
 
   // Focus directly onto selected node
   useEffect(() => {
     if (focusedPosition) {
+      targetDistanceRef.current = null;
       targetLookAt.current = new THREE.Vector3(...focusedPosition);
-      // Cinematic close-up framing tailored to the node's position
       targetCamPos.current = new THREE.Vector3(
         focusedPosition[0] * 0.45,
         focusedPosition[1] + 0.5,
-        focusedPosition[2] + 4.8
+        focusedPosition[2] + 5.8
       );
     }
   }, [focusedPosition]);
 
+  // Camera presets transition (fires on preset select or re-select)
   useEffect(() => {
-    if (!focusedPosition) {
+    if (!focusedPosition && presetKey > 0) {
+      targetDistanceRef.current = null;
       switch (cameraPreset) {
         case 'isometric':
-          targetCamPos.current = new THREE.Vector3(5.2, 3.2, 5.2);
+          targetCamPos.current = new THREE.Vector3(5.6, 3.6, 5.6);
           targetLookAt.current = new THREE.Vector3(0, 0, 0);
           break;
         case 'top':
-          targetCamPos.current = new THREE.Vector3(0.01, 8.2, 0.4);
+          targetCamPos.current = new THREE.Vector3(0.01, 8.8, 0.4);
           targetLookAt.current = new THREE.Vector3(0, 0, 0);
           break;
         case 'front':
-          targetCamPos.current = new THREE.Vector3(0, 0.3, 7.8);
+          targetCamPos.current = new THREE.Vector3(0, 0.3, 8.2);
           targetLookAt.current = new THREE.Vector3(0, 0, 0);
           break;
         case 'default':
         default:
-          targetCamPos.current = new THREE.Vector3(0, 1.3, 8.0);
+          targetCamPos.current = new THREE.Vector3(0, 1.3, 8.4);
           targetLookAt.current = new THREE.Vector3(0, 0, 0);
           break;
       }
     }
-  }, [cameraPreset, focusedPosition]);
+  }, [cameraPreset, presetKey, focusedPosition]);
 
-  // Handle Zoom In / Zoom Out actions from HUD buttons
+  // Explicit Refresh / Reset View action
   useEffect(() => {
-    if (zoomAction !== 0 && controlsRef.current) {
-      const dir = new THREE.Vector3();
-      camera.getWorldDirection(dir);
-      camera.position.addScaledVector(dir, zoomAction * 0.9);
-      controlsRef.current.update();
-      if (onResetComplete) onResetComplete();
+    if (resetSignal > 0) {
+      targetDistanceRef.current = null;
+      targetCamPos.current = new THREE.Vector3(0, 1.3, 8.4);
+      targetLookAt.current = new THREE.Vector3(0, 0, 0);
     }
-  }, [zoomAction, camera, onResetComplete]);
+  }, [resetSignal]);
+
+  // Smooth Zoom In / Zoom Out: smoothly adjusts distance along view ray with bounds clamping
+  useEffect(() => {
+    if (!zoomTrigger || !controlsRef.current) return;
+
+    const currentTarget = controlsRef.current.target;
+    const offset = new THREE.Vector3().subVectors(camera.position, currentTarget);
+    const currentDistance = offset.length();
+
+    // Use current pending target distance if mid-animation so rapid clicks accumulate gracefully
+    const baseDistance = targetDistanceRef.current ?? currentDistance;
+    const zoomStep = 0.75;
+
+    let newDistance: number;
+    if (zoomTrigger.dir === 'in') {
+      newDistance = Math.max(5.5, baseDistance - zoomStep);
+    } else {
+      newDistance = Math.min(9.8, baseDistance + zoomStep);
+    }
+
+    targetDistanceRef.current = newDistance;
+    // Clear whole-position target so smooth distance lerping takes over
+    targetCamPos.current = null;
+  }, [zoomTrigger, camera]);
 
   useFrame((_, delta) => {
+    if (!controlsRef.current) return;
+
+    // 1. Smooth Camera Fly-to for Presets, Focus framing, or Reset home
     if (targetCamPos.current) {
-      camera.position.lerp(targetCamPos.current, delta * 3.6);
-      if (controlsRef.current) {
-        controlsRef.current.target.lerp(targetLookAt.current, delta * 3.6);
-        controlsRef.current.update();
-      }
+      const lerpSpeed = Math.min(1, delta * 3.8);
+      camera.position.lerp(targetCamPos.current, lerpSpeed);
+      controlsRef.current.target.lerp(targetLookAt.current, lerpSpeed);
+      controlsRef.current.update();
+
       if (
-        camera.position.distanceTo(targetCamPos.current) < 0.05 &&
-        controlsRef.current?.target.distanceTo(targetLookAt.current) < 0.05
+        camera.position.distanceTo(targetCamPos.current) < 0.02 &&
+        controlsRef.current.target.distanceTo(targetLookAt.current) < 0.02
       ) {
+        camera.position.copy(targetCamPos.current);
+        controlsRef.current.target.copy(targetLookAt.current);
         targetCamPos.current = null;
+      }
+    }
+
+    // 2. Cinematic Smooth Zoom interpolation
+    if (targetDistanceRef.current !== null) {
+      const currentTarget = controlsRef.current.target;
+      const offset = new THREE.Vector3().subVectors(camera.position, currentTarget);
+      const currentDist = offset.length();
+
+      if (currentDist > 0.001) {
+        const lerpSpeed = Math.min(1, delta * 5.2);
+        const newDist = THREE.MathUtils.lerp(currentDist, targetDistanceRef.current, lerpSpeed);
+        offset.normalize().multiplyScalar(newDist);
+        camera.position.copy(currentTarget).add(offset);
+        controlsRef.current.update();
+
+        if (Math.abs(newDist - targetDistanceRef.current) < 0.008) {
+          offset.normalize().multiplyScalar(targetDistanceRef.current);
+          camera.position.copy(currentTarget).add(offset);
+          controlsRef.current.update();
+          targetDistanceRef.current = null;
+        }
+      } else {
+        targetDistanceRef.current = null;
       }
     }
   });
@@ -1072,17 +1138,19 @@ function SceneCameraManager({
     <OrbitControls
       ref={controlsRef}
       enableZoom={true}
-      minDistance={3.2}
-      maxDistance={14.0}
+      zoomSpeed={0.8}
+      minDistance={5.5}
+      maxDistance={9.8}
       enablePan={true}
       enableDamping={true}
-      dampingFactor={0.05}
-      autoRotate={isAutoRotating && !burstActive && !focusedPosition}
+      dampingFactor={0.06}
+      autoRotate={isAutoRotating && !burstActive && !focusedPosition && !targetCamPos.current}
       autoRotateSpeed={0.65}
       minPolarAngle={0.12}
       maxPolarAngle={Math.PI / 2 + 0.12}
       onStart={() => {
         targetCamPos.current = null;
+        targetDistanceRef.current = null;
       }}
     />
   );
@@ -1164,8 +1232,11 @@ export function ObservatorySection() {
 
   // Cinematic 360-Degree Camera, Focused Node & View Controls
   const [cameraPreset, setCameraPreset] = useState<'default' | 'isometric' | 'top' | 'front'>('default');
+  const [presetKey, setPresetKey] = useState<number>(1);
   const [isAutoRotating, setIsAutoRotating] = useState(true);
-  const [zoomAction, setZoomAction] = useState(0);
+  const [zoomTrigger, setZoomTrigger] = useState<{ dir: 'in' | 'out'; id: number } | null>(null);
+  const [resetSignal, setResetSignal] = useState<number>(0);
+  const [isResetting, setIsResetting] = useState(false);
   const [focusedNodeId, setFocusedNodeId] = useState<string | null>(null);
 
   const focusedPosition = useMemo(() => {
@@ -1174,11 +1245,25 @@ export function ObservatorySection() {
     return match ? match.position : null;
   }, [focusedNodeId, currentNodes]);
 
+  const handleResetCamera = () => {
+    setFocusedNodeId(null);
+    setFilter('all');
+    setCameraPreset('default');
+    setPresetKey(Date.now());
+    setIsAutoRotating(true);
+    setResetSignal(Date.now());
+    setIsResetting(true);
+    setActiveNode(platform === 'aws' ? AWS_NODES[2] : CPC2_NODES[1]);
+    setTimeout(() => setIsResetting(false), 700);
+  };
+
   const handleSelectPlatform = (newPlatform: ArchitecturePlatform) => {
     setPlatform(newPlatform);
     setFilter('all');
     setFocusedNodeId(null);
     setCameraPreset('default');
+    setPresetKey(Date.now());
+    setResetSignal(Date.now());
     setActiveNode(newPlatform === 'aws' ? AWS_NODES[2] : CPC2_NODES[1]);
   };
 
@@ -1218,6 +1303,8 @@ export function ObservatorySection() {
       setFilter('all');
       setFocusedNodeId(null);
       setCameraPreset('default');
+      setPresetKey(Date.now());
+      setResetSignal(Date.now());
     } else {
       const match = currentNodes.find((n) => n.id === tab.nodeId);
       if (match) {
@@ -1388,15 +1475,11 @@ export function ObservatorySection() {
                 {focusedNodeId && (
                   <button
                     type="button"
-                    onClick={() => {
-                      setFocusedNodeId(null);
-                      setFilter('all');
-                      setCameraPreset('default');
-                    }}
+                    onClick={handleResetCamera}
                     title="Reset focus to view full architecture"
                     className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-[11px] font-mono font-bold bg-sky-500/25 text-sky-300 border border-sky-400/60 hover:bg-sky-500/35 transition-all shadow-lg backdrop-blur-xl"
                   >
-                    <RotateCcw className="w-3.5 h-3.5" />
+                    <RotateCcw className={`w-3.5 h-3.5 transition-transform duration-500 ${isResetting ? '-rotate-180 text-sky-400' : ''}`} />
                     <span>Focus: {currentNodes.find(n => n.id === focusedNodeId)?.name.split(':')[0] || 'Node'} (Click to Reset)</span>
                   </button>
                 )}
@@ -1434,6 +1517,7 @@ export function ObservatorySection() {
                     onClick={() => {
                       setFocusedNodeId(null);
                       setCameraPreset('isometric');
+                      setPresetKey(Date.now());
                       setIsAutoRotating(false);
                     }}
                     className={`px-2 py-1 rounded-lg transition-all ${
@@ -1451,6 +1535,7 @@ export function ObservatorySection() {
                     onClick={() => {
                       setFocusedNodeId(null);
                       setCameraPreset('front');
+                      setPresetKey(Date.now());
                       setIsAutoRotating(false);
                     }}
                     className={`px-2 py-1 rounded-lg transition-all ${
@@ -1468,6 +1553,7 @@ export function ObservatorySection() {
                     onClick={() => {
                       setFocusedNodeId(null);
                       setCameraPreset('top');
+                      setPresetKey(Date.now());
                       setIsAutoRotating(false);
                     }}
                     className={`px-2 py-1 rounded-lg transition-all ${
@@ -1486,7 +1572,7 @@ export function ObservatorySection() {
               {/* High-Performance 3D Canvas */}
               <Canvas
                 dpr={[1, 1.75]}
-                camera={{ position: [0, 1.3, 8.0], fov: 42 }}
+                camera={{ position: [0, 1.3, 8.4], fov: 42 }}
                 gl={{ antialias: true, alpha: true, powerPreference: 'high-performance' }}
               >
                 <ambientLight intensity={isLight ? 1.4 : 0.8} />
@@ -1513,22 +1599,23 @@ export function ObservatorySection() {
 
                 <SceneCameraManager
                   cameraPreset={cameraPreset}
+                  presetKey={presetKey}
                   isAutoRotating={isAutoRotating}
                   burstActive={burstActive}
-                  zoomAction={zoomAction}
+                  zoomTrigger={zoomTrigger}
                   focusedPosition={focusedPosition}
-                  onResetComplete={() => setZoomAction(0)}
+                  resetSignal={resetSignal}
                 />
               </Canvas>
 
-              {/* Floating Bottom-Right Zoom & Reset Controls */}
+              {/* Floating Bottom-Right Smooth Zoom & Refresh / Reset Controls */}
               <div className={`absolute bottom-4 right-4 z-20 flex items-center gap-1.5 p-1 rounded-xl border backdrop-blur-xl shadow-xl ${
                 isLight ? 'bg-white/90 border-slate-300' : 'bg-slate-950/85 border-slate-800'
               }`}>
                 <button
                   type="button"
-                  onClick={() => setZoomAction(1)}
-                  title="Zoom In"
+                  onClick={() => setZoomTrigger({ dir: 'in', id: Date.now() })}
+                  title="Smooth Zoom In"
                   className={`p-1.5 rounded-lg transition-all ${
                     isLight ? 'text-slate-700 hover:text-slate-950 hover:bg-slate-100' : 'text-slate-300 hover:text-white hover:bg-slate-850'
                   }`}
@@ -1537,8 +1624,8 @@ export function ObservatorySection() {
                 </button>
                 <button
                   type="button"
-                  onClick={() => setZoomAction(-1)}
-                  title="Zoom Out"
+                  onClick={() => setZoomTrigger({ dir: 'out', id: Date.now() })}
+                  title="Smooth Zoom Out"
                   className={`p-1.5 rounded-lg transition-all ${
                     isLight ? 'text-slate-700 hover:text-slate-950 hover:bg-slate-100' : 'text-slate-300 hover:text-white hover:bg-slate-850'
                   }`}
@@ -1547,18 +1634,13 @@ export function ObservatorySection() {
                 </button>
                 <button
                   type="button"
-                  onClick={() => {
-                    setFocusedNodeId(null);
-                    setFilter('all');
-                    setCameraPreset('default');
-                    setIsAutoRotating(true);
-                  }}
-                  title="Reset Camera View to 360° Orbit"
+                  onClick={handleResetCamera}
+                  title="Reset Camera View to Default 360° Orbit"
                   className={`p-1.5 rounded-lg transition-all ${
                     isLight ? 'text-slate-700 hover:text-slate-950 hover:bg-slate-100' : 'text-slate-300 hover:text-white hover:bg-slate-850'
                   }`}
                 >
-                  <RotateCcw className="w-3.5 h-3.5" />
+                  <RotateCcw className={`w-3.5 h-3.5 transition-transform duration-500 ${isResetting ? '-rotate-180 text-sky-400' : ''}`} />
                 </button>
               </div>
 

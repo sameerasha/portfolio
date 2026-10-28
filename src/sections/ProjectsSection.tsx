@@ -263,7 +263,7 @@ export function ProjectsSection({ profile }: ProjectsSectionProps) {
                 </span>
                 <span className="text-slate-400">•</span>
                 <span className={isLight ? 'text-sky-800 font-bold' : 'text-sky-400'}>
-                  4.9+ YEARS INDUSTRY EXPERIENCE
+                  6+ YEARS INDUSTRY EXPERIENCE
                 </span>
               </div>
 
@@ -276,7 +276,7 @@ export function ProjectsSection({ profile }: ProjectsSectionProps) {
                 <p className={`text-xs sm:text-sm leading-relaxed mt-1.5 max-w-2xl ${
                   isLight ? 'text-slate-700 font-medium' : 'text-slate-300 font-normal'
                 }`}>
-                  These projects represent verified enterprise systems across <strong>Infosys</strong> and <strong>SOFFRONT Software</strong>.
+                  These projects represent verified enterprise systems across <strong>Accenture</strong>, <strong>Infosys</strong>, and <strong>SOFFRONT Software</strong>.
                   Interactive architectural topologies, component role breakdowns, Mockito/JUnit test coverage strategies, and containerized Docker runbooks are fully accessible in each project inspector dialog.
                 </p>
               </div>

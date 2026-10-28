@@ -24,7 +24,7 @@ export function ProfileConfigDrawer({ profile, isOpen, onClose }: ProfileConfigD
     {
       item: 'Verified Work Experience',
       isCompleted: !profile.experience.some((e) => e.isPlaceholder),
-      helper: `Verified: Technology Analyst at Infosys & Jr Java Developer at SOFFRONT Software.`,
+      helper: `Verified: Full Stack & AWS Cloud Engineer at Accenture (2024–Present), Infosys (2021–2024), and SOFFRONT Software (2019–2021).`,
     },
     {
       item: 'Academic Education & Qualifications',
@@ -39,7 +39,9 @@ export function ProfileConfigDrawer({ profile, isOpen, onClose }: ProfileConfigD
     {
       item: 'GitHub Profile URL',
       isCompleted: Boolean(profile.socialLinks.github),
-      helper: 'Set your real GitHub URL in profile.ts (optional).',
+      helper: profile.socialLinks.github
+        ? `Verified: ${profile.socialLinks.github}`
+        : 'Set your real GitHub URL in profile.ts (optional).',
       signupUrl: profile.socialLinks.githubSignup,
     },
     {
@@ -54,10 +56,10 @@ export function ProfileConfigDrawer({ profile, isOpen, onClose }: ProfileConfigD
 export const profileData: ProfileData = {
   name: "${profile.name}",
   targetRole: "${profile.targetRole}",
-  totalExperience: "${profile.totalExperience || '4.9+ Years'}",
+  totalExperience: "${profile.totalExperience || '6+ Years'}",
   email: "${profile.email}",
   phone: "${profile.phone || '+91-8249067001'}",
-  location: "${profile.location || 'Bangalore, India'}",
+  location: "${profile.location || 'Bhubaneswar, India'}",
   
   socialLinks: {
     github: ${profile.socialLinks.github ? `"${profile.socialLinks.github}"` : 'null'},
@@ -87,10 +89,10 @@ export const profileData: ProfileData = {
         <div className="p-4 rounded-xl bg-sky-950/40 border border-sky-800/50 flex items-start gap-3 text-xs text-sky-200">
           <Terminal className="w-5 h-5 text-sky-400 shrink-0 mt-0.5" />
           <div>
-            <span className="font-semibold text-white">Resume Data Integrated: </span>
-            All records in this portfolio have been synchronized with Rabinarayan Asha's confirmed resume,
-            including 4.9+ years of experience at Infosys and SOFFRONT, CPC 2.0 Tax processing microservices,
-            SOFFRONT CRM, B-Tech in CSE from BPUT, and core technologies.
+            <span className="font-semibold text-white">Career & Engineering Records Integrated: </span>
+            All records in this portfolio have been synchronized with Rabinarayan Asha's confirmed experience,
+            including 6+ years across Accenture (2024–Present, Java 21, Spring Boot 3, React, AWS Cloud, EKS, RDS Postgres, SQS/SNS, GitLab CI/CD),
+            Infosys (2021–2024, CPC 2.0 Tax processing microservices & Kafka), and SOFFRONT Software (2019–2021, Cloud CRM).
           </div>
         </div>
 

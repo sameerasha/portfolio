@@ -11,6 +11,7 @@ import {
   Phone,
   MapPin,
 } from 'lucide-react';
+import { GithubIcon } from '../components/common/Icons';
 import type { ProfileData } from '../types/portfolio';
 import { SectionHeading } from '../components/common/SectionHeading';
 import { useTheme } from '../context/ThemeContext';
@@ -250,12 +251,19 @@ export function ContactSection({ profile, onOpenConfigDrawer }: ContactSectionPr
 
               {/* GitHub */}
               <div className={`p-3.5 rounded-xl border flex items-center justify-between gap-3 ${
-                isLight ? 'bg-slate-50 border-slate-200' : 'bg-slate-950/70 border-slate-855'
+                isLight ? 'bg-slate-50 border-slate-200' : 'bg-slate-955/70 border-slate-800'
               }`}>
-                <div>
-                  <div className={`text-xs font-semibold ${isLight ? 'text-slate-900' : 'text-white'}`}>GitHub</div>
-                  <div className={`text-[11px] font-mono ${isLight ? 'text-slate-500' : 'text-slate-400'}`}>
-                    {profile.socialLinks.github ? profile.socialLinks.github : 'Add username in profile.ts'}
+                <div className="flex items-center gap-3">
+                  <div className={`w-9 h-9 rounded-lg flex items-center justify-center shrink-0 border ${
+                    isLight ? 'bg-white border-slate-200 text-slate-900 shadow-sm' : 'bg-slate-900 border-slate-800 text-white'
+                  }`}>
+                    <GithubIcon className="w-4 h-4 text-sky-500" />
+                  </div>
+                  <div>
+                    <div className={`text-xs font-semibold ${isLight ? 'text-slate-900' : 'text-white'}`}>GitHub</div>
+                    <div className={`text-[11px] font-mono ${isLight ? 'text-slate-600' : 'text-slate-400'}`}>
+                      {profile.socialLinks.github ? profile.socialLinks.github : 'Add username in profile.ts'}
+                    </div>
                   </div>
                 </div>
 
@@ -264,10 +272,10 @@ export function ContactSection({ profile, onOpenConfigDrawer }: ContactSectionPr
                     href={profile.socialLinks.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-mono bg-slate-800 text-white"
+                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono font-semibold bg-slate-900 hover:bg-slate-800 text-white dark:bg-slate-800 dark:hover:bg-slate-700 transition-all shadow-sm"
                   >
                     <span>Visit</span>
-                    <ExternalLink className="w-3 h-3" />
+                    <ExternalLink className="w-3 h-3 text-slate-400" />
                   </a>
                 ) : (
                   <a

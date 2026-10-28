@@ -8,11 +8,11 @@ interface CinematicPreloaderProps {
 }
 
 const BOOT_LOGS = [
-  'BOOT // INITIALIZING RUNTIME ENVIRONMENT',
-  'MESH // CONNECTING APACHE KAFKA CLUSTER',
-  'CORE // MOUNTING SPRING BOOT MICROSERVICES',
-  'DATA // HYDRATING ORACLE & POSTGRES LEDGER',
-  'READY // LAUNCHING 3D CINEMATIC ARCHITECTURE',
+  'BOOT // INITIALIZING RUNTIME ENVIRONMENT [JAVA 21]',
+  'CLOUD // CONNECTING AWS EKS & MICROSERVICES CLUSTER',
+  'CORE // MOUNTING SPRING BOOT 3 & REACT.JS ARCHITECTURE',
+  'DATA // HYDRATING RDS POSTGRESQL & SQS / SNS BROKERS',
+  'READY // LAUNCHING 3D SYSTEM OBSERVATORY',
 ];
 
 export function CinematicPreloader({ onComplete }: CinematicPreloaderProps) {
@@ -150,7 +150,7 @@ export function CinematicPreloader({ onComplete }: CinematicPreloaderProps) {
           <span className={`hidden sm:inline-block text-[11px] font-semibold ${
             isLight ? 'text-slate-600' : 'text-slate-500'
           }`}>
-            BANGALORE // INFOSYS TECH ANALYST
+            BHUBANESWAR // ACCENTURE SENIOR SOFTWARE ENGINEER
           </span>
         </div>
 
@@ -202,7 +202,7 @@ export function CinematicPreloader({ onComplete }: CinematicPreloaderProps) {
             <div className={`text-[11px] font-mono tracking-[0.3em] uppercase font-bold ${
               isLight ? 'text-sky-700' : 'text-sky-400'
             }`}>
-              Full Stack Architect & Systems Engineer
+              Senior Software Engineer @ Accenture
             </div>
             <h1 className={`text-3xl sm:text-5xl font-black tracking-tight font-mono ${
               isLight ? 'text-slate-950' : 'text-white'

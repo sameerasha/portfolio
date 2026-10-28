@@ -9,19 +9,19 @@ import type { ProfileData } from '../types/portfolio';
 
 export const profileData: ProfileData = {
   name: 'Rabinarayan Asha',
-  fallbackTitle: 'Full Stack Developer',
-  targetRole: 'Full Stack Developer / Java Microservices Engineer',
-  totalExperience: '4.9+ Years',
-  location: 'Bangalore, India',
+  fallbackTitle: 'Senior Software Engineer',
+  targetRole: 'Senior Software Engineer / Full Stack & AWS Cloud Architect',
+  totalExperience: '6+ Years',
+  location: 'Bhubaneswar, India',
   phone: '+91-8249067001',
   email: 'rabinarayanasha@gmail.com',
 
-  headline: 'Engineering Scalable Systems. Building Event-Driven Microservices.',
+  headline: 'Engineering Cloud-Native Systems. Building Java 21 Microservices & AWS.',
   supportingCopy:
-    'Technology Analyst at Infosys with 4.9+ years of experience specializing in Java 11, Spring Boot, Apache Kafka, Microservices architecture, Hibernate, and React.js.',
+    'Senior Software Engineer at Accenture with 6+ years of experience specializing in Java 21, Spring Boot 3, Microservices architecture, React.js, and enterprise AWS Cloud Infrastructure (Amazon EKS, EC2, Elastic Beanstalk, RDS Postgres, SQS/SNS, CloudFront CDN, Route 53, VPC/NAT, CloudWatch, Lambda, and GitLab CI/CD).',
 
   socialLinks: {
-    github: null,
+    github: 'https://github.com/sameerasha',
     linkedin: null,
     githubSignup: 'https://github.com/signup',
     linkedinSignup: 'https://www.linkedin.com/signup',
@@ -35,56 +35,56 @@ export const profileData: ProfileData = {
 
   aboutDraft: {
     leadParagraph:
-      'Experienced Software Engineer and Full Stack Developer with 4.9+ years of expertise in designing and implementing distributed Microservices architectures using Java 11, Spring Boot, Apache Kafka, and Hibernate, paired with modern responsive user interfaces in React.js and Redux.',
+      'Senior Software Engineer and Full Stack Cloud Architect with 6+ years of expertise in designing and deploying enterprise Microservices architectures using Java 21, Spring Boot 3, and React.js, backed by end-to-end AWS Cloud Infrastructure across Amazon EKS, EC2, Elastic Beanstalk, RDS PostgreSQL, SQS, SNS, and GitLab CI/CD.',
     bodyParagraph:
-      'Currently serving as a Technology Analyst at Infosys in Bangalore, I architect mission-critical backend services, event-driven data streaming pipelines, and high-performance relational datastores. My engineering approach emphasizes design patterns (Singleton, Factory, Builder, DAO), database performance tuning (HQL, indexing), automated testing with Mockito and JUnit, and containerized CI/CD deployments using Docker, Kubernetes, and Jenkins.',
+      'Currently serving at Accenture in Bhubaneswar, I architect and build enterprise-scale cloud microservices using Java 21, Spring Boot 3, and React.js. My technical foundation spans end-to-end AWS cloud engineering (EC2, Elastic Beanstalk, CloudFront CDN, RDS PostgreSQL Multi-AZ, SQS & SNS messaging, ALB load balancers, Route 53, IAM security, S3 buckets, VPC with public/private subnets and NAT gateways, CloudWatch, Lambda, ACM, KMS, Docker, Kubernetes, and Amazon EKS) with automated GitLab CI/CD pipelines. Previously, I served as a Technology Analyst at Infosys developing CPC 2.0 national tax return processing microservices and as a Full Stack Developer at SOFFRONT Software.',
     focusAreas: [
       {
         title: 'Backend Systems & Microservices',
         description:
-          'Designing decoupled, scalable microservices architectures using Spring Boot, Java 11, Hibernate ORM, and REST APIs with fault tolerance and modular service boundaries.',
-        skills: ['Java 11', 'Spring Boot', 'Microservices', 'Hibernate', 'REST APIs', 'Design Patterns'],
+          'Engineering resilient, decoupled microservices with Java 21, Spring Boot 3, Hibernate ORM, and REST APIs featuring circuit breakers, asynchronous processing, and clean architectural separation.',
+        skills: ['Java 21', 'Spring Boot 3', 'Microservices', 'REST APIs', 'Design Patterns', 'Hibernate'],
       },
       {
-        title: 'Event-Driven Streaming & Messaging',
+        title: 'Cloud, Containers & DevOps',
         description:
-          'Building high-throughput, real-time event-driven processing pipelines with Apache Kafka and Confluent Kafka Control Center for inter-service choreography.',
-        skills: ['Apache Kafka', 'Confluent Kafka', 'Event-Driven', 'Real-time Processing', 'Redis'],
+          'Designing secure AWS cloud environments with Amazon EKS, EC2, Elastic Beanstalk, VPC (Multi-AZ subnets & NAT), CloudFront CDN, Route 53, SQS, SNS, Lambda, CloudWatch, Docker, and GitLab CI/CD.',
+        skills: ['AWS (EKS, EC2, RDS, S3)', 'Docker & Kubernetes', 'GitLab CI/CD', 'VPC & NAT', 'CloudWatch', 'Lambda'],
       },
       {
         title: 'Modern Frontend Engineering',
         description:
-          'Creating responsive, accessible single-page applications and component libraries with React.js, React Redux, Material UI, TypeScript, and modern CSS3/Bootstrap.',
-        skills: ['React.js', 'React Redux', 'Material UI', 'JavaScript', 'TypeScript', 'Node.js'],
+          'Crafting high-performance, responsive single-page applications and dashboards with React.js, React Redux, TypeScript, Material UI, and modern styling architectures.',
+        skills: ['React.js', 'TypeScript', 'React Redux', 'JavaScript', 'HTML5/CSS3', 'Material UI'],
       },
       {
-        title: 'Database Management & Cloud DevOps',
+        title: 'Persistence & Data Modeling',
         description:
-          'Designing schemas, HQL queries, and transactional flows across PostgreSQL, Oracle, and MySQL. Orchestrating containerized workloads with Docker, Kubernetes, Jenkins CI/CD, and AWS.',
-        skills: ['PostgreSQL', 'Oracle', 'MySQL', 'Docker', 'Kubernetes', 'Jenkins CI/CD', 'AWS'],
+          'Managing high-availability relational persistence across Amazon RDS (PostgreSQL), Oracle 19c, MySQL, and ElastiCache Redis, with automated backups, KMS encryption, and S3 data lakes.',
+        skills: ['Amazon RDS (Postgres)', 'Oracle DB', 'MySQL', 'Redis Cache', 'Amazon S3', 'Flyway / HQL'],
       },
     ],
   },
 
   skills: [
-    // --- Backend & Core Languages (Verified from Resume) ---
+    // --- Backend & Core Languages ---
     {
-      name: 'Java (11 & 8)',
+      name: 'Java (21, 11 & 8)',
       isConfirmed: true,
       category: 'backend',
-      description: 'Core object-oriented programming, modern Java 11 features, streams, concurrency, and memory management.',
+      description: 'Modern Java 21 features (virtual threads, record patterns, pattern matching), Java 11/8, streams, concurrency, and memory management.',
     },
     {
-      name: 'Spring Boot',
+      name: 'Spring Boot 3',
       isConfirmed: true,
       category: 'backend',
-      description: 'Enterprise framework for building production-grade microservices, dependency injection, and actuator health monitoring.',
+      description: 'Enterprise framework for building production-grade microservices, dependency injection, Spring Security, and actuator health monitoring.',
     },
     {
       name: 'Microservices Architecture',
       isConfirmed: true,
       category: 'backend',
-      description: 'Domain decomposition, autonomous service boundaries, fault tolerance, and RESTful service-to-service communication.',
+      description: 'Domain decomposition, autonomous service boundaries, fault tolerance, API gateways, and RESTful inter-service communication.',
     },
     {
       name: 'Apache Kafka',
@@ -93,7 +93,7 @@ export const profileData: ProfileData = {
       description: 'Distributed event streaming, real-time message brokering, producer/consumer pipelines, and topic partitioning.',
     },
     {
-      name: 'Hibernate & HQL',
+      name: 'Hibernate & JPA',
       isConfirmed: true,
       category: 'backend',
       description: 'Object-Relational Mapping (ORM), entity lifecycle, caching, HQL queries, and database transaction management.',
@@ -108,33 +108,15 @@ export const profileData: ProfileData = {
       name: 'REST APIs',
       isConfirmed: true,
       category: 'backend',
-      description: 'HTTP resource modeling, payload validation, status envelopes, and seamless contract specifications.',
+      description: 'HTTP resource modeling, payload validation, status envelopes, and seamless OpenAPI contract specifications.',
     },
 
-    // --- Frontend Technologies (Verified from Resume) ---
+    // --- Frontend Technologies ---
     {
       name: 'React.js',
       isConfirmed: true,
       category: 'frontend',
-      description: 'Component architecture, custom hooks, virtual DOM rendering, and client-side application state management.',
-    },
-    {
-      name: 'React Redux',
-      isConfirmed: true,
-      category: 'frontend',
-      description: 'Predictable centralized state container, action dispatchers, reducers, and global state synchronization.',
-    },
-    {
-      name: 'Material UI (MUI)',
-      isConfirmed: true,
-      category: 'frontend',
-      description: 'Production-ready component systems, responsive theming, data grids, and design system alignment.',
-    },
-    {
-      name: 'JavaScript (ES6+)',
-      isConfirmed: true,
-      category: 'frontend',
-      description: 'Modern asynchronous programming, closures, promises, event loop, and DOM manipulation.',
+      description: 'Modern component architecture, custom hooks, virtual DOM rendering, and client-side application state management.',
     },
     {
       name: 'TypeScript',
@@ -143,10 +125,22 @@ export const profileData: ProfileData = {
       description: 'Static typing, interfaces, generics, and strict contract verification across full-stack applications.',
     },
     {
-      name: 'HTML5 & CSS3 / Bootstrap',
+      name: 'React Redux & Toolkit',
       isConfirmed: true,
       category: 'frontend',
-      description: 'Semantic markup, accessible responsive grid layouts, Flexbox, CSS animations, and cross-browser styling.',
+      description: 'Predictable centralized state container, RTK slices, action dispatchers, reducers, and global state synchronization.',
+    },
+    {
+      name: 'JavaScript (ES6+)',
+      isConfirmed: true,
+      category: 'frontend',
+      description: 'Modern asynchronous programming, async/await, closures, promises, event loop, and DOM manipulation.',
+    },
+    {
+      name: 'HTML5 & CSS3 / Tailwind / MUI',
+      isConfirmed: true,
+      category: 'frontend',
+      description: 'Semantic markup, accessible responsive grid layouts, Tailwind CSS, Material UI (MUI), Flexbox, and CSS animations.',
     },
     {
       name: 'Node.js',
@@ -155,12 +149,12 @@ export const profileData: ProfileData = {
       description: 'Server-side JavaScript runtime, package management, build scripting, and auxiliary micro-tooling.',
     },
 
-    // --- Database Management (Verified from Resume) ---
+    // --- Database Management & Persistence ---
     {
-      name: 'PostgreSQL',
+      name: 'Amazon RDS (PostgreSQL)',
       isConfirmed: true,
       category: 'databases',
-      description: 'Enterprise relational database design, indexing strategies, complex joins, and ACID transactional integrity.',
+      description: 'Enterprise relational database design, Multi-AZ failover, indexing strategies, complex joins, and ACID transactional integrity.',
     },
     {
       name: 'Oracle Database',
@@ -175,30 +169,80 @@ export const profileData: ProfileData = {
       description: 'Relational data modeling, query optimization, database migrations, and connection pooling.',
     },
     {
-      name: 'Redis',
+      name: 'Redis Cache',
       isConfirmed: true,
       category: 'databases',
       description: 'In-memory distributed key-value cache, session storage, and low-latency data access acceleration.',
     },
 
-    // --- Cloud & DevOps (Verified from Resume) ---
+    // --- AWS Cloud & Containers ---
+    {
+      name: 'Amazon EKS (Kubernetes)',
+      isConfirmed: true,
+      category: 'cloud',
+      description: 'Managed Kubernetes on AWS, container orchestration, deployment manifests, pod autoscaling, Helm charts, and IAM Roles for Service Accounts (IRSA).',
+    },
+    {
+      name: 'AWS EC2 & Elastic Beanstalk',
+      isConfirmed: true,
+      category: 'cloud',
+      description: 'Elastic Compute Cloud instances, autoscaling groups, application tier deployment, and managed Beanstalk environments.',
+    },
+    {
+      name: 'Amazon CloudFront (CDN) & Route 53',
+      isConfirmed: true,
+      category: 'cloud',
+      description: 'Global edge content delivery, latency-based DNS routing, Origin Access Control (OAC), and health-checked endpoints.',
+    },
+    {
+      name: 'Amazon SQS & SNS',
+      isConfirmed: true,
+      category: 'cloud',
+      description: 'Decoupled asynchronous messaging, FIFO queues, dead-letter queue (DLQ) processing, and pub/sub topic fan-out.',
+    },
+    {
+      name: 'Amazon VPC, Subnets & NAT',
+      isConfirmed: true,
+      category: 'cloud',
+      description: 'Multi-AZ Virtual Private Cloud design, public/private subnet isolation, NAT Gateways, Internet Gateways, and CIDR planning.',
+    },
+    {
+      name: 'Amazon S3 Buckets',
+      isConfirmed: true,
+      category: 'cloud',
+      description: 'Scalable object storage, data lake buckets, lifecycle management, pre-signed URLs, and server-side encryption.',
+    },
+    {
+      name: 'AWS Lambda',
+      isConfirmed: true,
+      category: 'cloud',
+      description: 'Serverless event-driven compute functions, event source mapping, and micro-task execution.',
+    },
+    {
+      name: 'AWS IAM, Security Groups & KMS',
+      isConfirmed: true,
+      category: 'cloud',
+      description: 'Identity & Access Management policies, customer-managed KMS encryption keys, and fine-grained Security Group firewall rules.',
+    },
+    {
+      name: 'AWS Certificate Manager (ACM)',
+      isConfirmed: true,
+      category: 'cloud',
+      description: 'Automated SSL/TLS certificate provisioning, renewal, and HTTPS termination at ALB and CloudFront.',
+    },
     {
       name: 'Docker',
       isConfirmed: true,
       category: 'cloud',
       description: 'Container packaging, multi-stage lightweight image builds, layer caching, and isolated runtime environments.',
     },
+
+    // --- DevOps & Automation ---
     {
-      name: 'Kubernetes',
+      name: 'GitLab CI/CD',
       isConfirmed: true,
-      category: 'cloud',
-      description: 'Container orchestration, deployment manifests, pod scaling, service discovery, and rolling upgrades.',
-    },
-    {
-      name: 'Amazon AWS (S3 & Cloud)',
-      isConfirmed: true,
-      category: 'cloud',
-      description: 'Cloud document management, Amazon S3 storage integration, secure IAM access, and cloud workload hosting.',
+      category: 'devops',
+      description: 'Automated continuous integration and deployment pipelines, GitLab runners, Docker image registries, and automated Helm deployment.',
     },
     {
       name: 'Jenkins CI/CD',
@@ -219,12 +263,18 @@ export const profileData: ProfileData = {
       description: 'Java dependency management, build lifecycles, artifact packaging, and plugin configuration.',
     },
 
-    // --- Testing, Quality & Observability (Verified from Resume) ---
+    // --- Testing, Quality & Observability ---
     {
-      name: 'Mockito & JUnit',
+      name: 'Mockito & JUnit 5',
       isConfirmed: true,
       category: 'testing',
       description: 'Unit testing, mocked dependency isolation, test assertions, and integration test coverage across service layers.',
+    },
+    {
+      name: 'Amazon CloudWatch',
+      isConfirmed: true,
+      category: 'quality',
+      description: 'Real-time metrics, alarms, dashboard telemetry, log group aggregation, and container insights.',
     },
     {
       name: 'Dynatrace APM',
@@ -233,7 +283,7 @@ export const profileData: ProfileData = {
       description: 'Application performance monitoring, distributed request tracing, latency bottleneck analysis, and service telemetry.',
     },
     {
-      name: 'SonarLint / Code Quality',
+      name: 'SonarLint & SonarQube',
       isConfirmed: true,
       category: 'quality',
       description: 'Static code analysis, vulnerability detection, code smell elimination, and continuous compliance adherence.',
@@ -255,7 +305,7 @@ export const profileData: ProfileData = {
       status: 'Production System',
       role: 'Back-end Developer',
       teamSize: 25,
-      duration: 'August 2021 – Present (Infosys)',
+      duration: 'August 2021 – 2024 (Infosys)',
       overview:
         'The Centralized Processing Center (CPC 2.0) is a mission-critical government tax computing platform designed as an integrated group of microservices to process millions of income tax filings from e-filing through complete Return Processing (RP) and accounting settlement.',
       problemStatement:
@@ -476,29 +526,29 @@ POST /api/notifications/email      -> 200 OK (SendGrid email dispatch)`,
       tagline: 'Multi-AZ enterprise cloud architecture with React TypeScript, Spring Boot 3, Amazon EKS, PostgreSQL, and Terraform.',
       category: 'AWS Cloud & Kubernetes Architecture',
       status: 'Production System',
-      role: 'Senior AWS Cloud & Microservices Architect',
+      role: 'Senior Software Engineer',
       teamSize: 20,
-      duration: 'Enterprise Cloud Architecture',
+      duration: '2024 – Present (Accenture)',
       overview:
-        'A secure, scalable, highly available production-ready AWS 3-tier architecture separating presentation (React TypeScript SPA on S3 + CloudFront with OAC), application (Spring Boot 3 microservices on Amazon EKS in private subnets with Karpenter autoscaling), and data tiers (Amazon RDS for PostgreSQL Multi-AZ and ElastiCache for Redis in isolated database subnets).',
+        'A secure, scalable, highly available enterprise AWS cloud microservices architecture engineered at Accenture separating presentation (React TypeScript SPA on S3 + CloudFront CDN with OAC and Route 53), application (Spring Boot 3 microservices with Java 21 on Amazon EKS, EC2, and Elastic Beanstalk), and data tiers (Amazon RDS PostgreSQL Multi-AZ and ElastiCache Redis in isolated database subnets). Decoupled via Amazon SQS and SNS, secured with IAM, KMS, Security Groups, and automated with GitLab CI/CD pipelines.',
       problemStatement:
         'Modern enterprise microservices require physical multi-tier network isolation, automated scaling during seasonal surges, zero credential leakage, and seamless CI/CD delivery without exposing database or application nodes directly to the public internet.',
       proposedSolution:
-        'Architected a 3-tier AWS architecture across 2 Availability Zones (public subnets for ALB/NAT, private app subnets for EKS worker nodes, private database subnets for RDS/Redis). Integrated AWS WAF, Route 53, CloudFront OAC, AWS Load Balancer Controller, AWS Secrets Manager automated rotation, and end-to-end GitHub Actions CI/CD.',
+        'Architected a 3-tier AWS architecture across 2 Availability Zones (public subnets for ALB/NAT, private app subnets for EKS worker nodes & EC2, private database subnets for RDS/Redis). Integrated AWS WAF, Route 53, CloudFront OAC, AWS Load Balancer Controller, AWS Secrets Manager automated rotation, AWS Lambda serverless triggers, and automated GitLab CI/CD pipelines.',
       keyFeatures: [
-        'Tier 1: Presentation Tier — React.js TypeScript SPA compiled and hosted on private Amazon S3, distributed globally via CloudFront with Origin Access Control (OAC), ACM TLS 1.3, and AWS WAF bot mitigation.',
-        'Tier 2: Application Tier — Autonomous Spring Boot 3 / Java 21 microservices (Auth, User, Order, Notification, File Manager) containerized with Docker, deployed on Amazon EKS with Karpenter auto-scaling and IAM Roles for Service Accounts (IRSA).',
+        'Tier 1: Presentation Tier — React.js TypeScript SPA compiled and hosted on private Amazon S3, distributed globally via CloudFront CDN with Origin Access Control (OAC), Route 53 latency routing, ACM TLS 1.3, and AWS WAF bot mitigation.',
+        'Tier 2: Application Tier — Autonomous Spring Boot 3 / Java 21 microservices containerized with Docker, deployed on Amazon EKS, EC2, and Elastic Beanstalk with autoscaling and IAM Roles for Service Accounts (IRSA).',
         'Tier 3: Data Tier — Amazon RDS for PostgreSQL in isolated private database subnets with Multi-AZ automated failover, KMS encryption at rest and in transit, and automated 30-day credential rotation via AWS Secrets Manager.',
         'High-Speed Caching & Asynchronous Messaging — Amazon ElastiCache for Redis cluster for hot session cache; Amazon SQS FIFO and SNS fan-out for decoupled event-driven processing.',
-        'Infrastructure as Code (IaC) — Modular Terraform codebase managing VPC, subnets, EKS, ALB, RDS, and security groups with remote S3 backend state locking.',
+        'Infrastructure as Code (IaC) & Serverless — Modular Terraform codebase managing VPC, subnets, NAT gateways, EKS, ALB, RDS, and security groups; AWS Lambda for event-driven serverless tasks.',
       ],
       architectureOverview:
-        'Multi-AZ 3-Tier Pipeline: Client -> Route 53 -> CloudFront/S3 (Frontend) | API Path (/api/v1/*) -> AWS WAF -> ALB (Public Subnet) -> Amazon EKS Spring Boot Pods (Private App Subnet) -> Amazon RDS PostgreSQL & ElastiCache Redis (Private DB Subnet) -> SQS/SNS -> CloudWatch & X-Ray APM.',
+        'Multi-AZ 3-Tier Pipeline: Client -> Route 53 -> CloudFront/S3 (Frontend) | API Path (/api/v1/*) -> AWS WAF -> ALB (Public Subnet) -> Amazon EKS & EC2 Spring Boot Pods (Private App Subnet) -> Amazon RDS PostgreSQL & ElastiCache Redis (Private DB Subnet) -> SQS/SNS -> CloudWatch & Lambda.',
       architectureComponents: [
         {
           name: 'Presentation Tier (CloudFront + S3)',
           type: 'frontend',
-          tech: 'React 19, TypeScript, CloudFront OAC, Route 53, ACM',
+          tech: 'React.js, TypeScript, CloudFront OAC, Route 53, ACM',
           role: 'Serves static SPA assets with edge caching, sub-millisecond CDN delivery, and HTTPS redirection.',
         },
         {
@@ -508,9 +558,9 @@ POST /api/notifications/email      -> 200 OK (SendGrid email dispatch)`,
           role: 'Terminates TLS 1.3, applies WAF rate limits, and routes API requests to EKS target groups.',
         },
         {
-          name: 'Application Tier (Amazon EKS)',
+          name: 'Application Tier (Amazon EKS & EC2)',
           type: 'service',
-          tech: 'Spring Boot 3, Java 21, Kubernetes 1.30, Docker, Helm',
+          tech: 'Spring Boot 3, Java 21, Kubernetes, Docker, Elastic Beanstalk',
           role: 'Orchestrates containerized microservices (Auth, User, Order, Notification, File) with HPA and Karpenter.',
         },
         {
@@ -528,7 +578,7 @@ POST /api/notifications/email      -> 200 OK (SendGrid email dispatch)`,
         {
           name: 'Asynchronous Messaging (SQS & SNS)',
           type: 'broker',
-          tech: 'AWS SQS FIFO, Amazon SNS, EventBridge',
+          tech: 'AWS SQS FIFO, Amazon SNS, EventBridge, Lambda',
           role: 'Decouples order processing and notification workflows with dead-letter queue (DLQ) fault tolerance.',
         },
       ],
@@ -536,9 +586,9 @@ POST /api/notifications/email      -> 200 OK (SendGrid email dispatch)`,
         backend: ['Java 21', 'Spring Boot 3', 'Spring Security (JWT)', 'Spring Data JPA', 'Hibernate', 'Flyway', 'Maven'],
         frontend: ['React.js', 'TypeScript', 'Tailwind CSS', 'Redux Toolkit', 'Axios', 'Jest'],
         database: ['Amazon RDS for PostgreSQL 16', 'Amazon ElastiCache for Redis', 'Amazon S3 Data Lake'],
-        infrastructure: ['Amazon EKS (Kubernetes)', 'Amazon VPC (Multi-AZ)', 'ALB', 'CloudFront (OAC)', 'Route 53', 'AWS WAF', 'AWS Secrets Manager', 'Terraform'],
+        infrastructure: ['Amazon EKS (Kubernetes)', 'AWS EC2', 'AWS Elastic Beanstalk', 'Amazon VPC (Multi-AZ & NAT)', 'ALB', 'CloudFront (CDN)', 'Route 53', 'AWS Lambda', 'AWS ACM', 'AWS KMS', 'AWS IAM & Security Groups', 'Terraform'],
         testing: ['JUnit 5', 'Mockito', 'SonarQube Quality Gate', 'EKS Health Probes'],
-        devops: ['GitHub Actions CI/CD', 'Helm Charts', 'Amazon ECR', 'Docker Multi-stage', 'CloudWatch', 'AWS X-Ray'],
+        devops: ['GitLab CI/CD Pipelines', 'GitHub Actions', 'Helm Charts', 'Amazon ECR', 'Docker Multi-stage', 'CloudWatch', 'AWS X-Ray'],
       },
       implementationHighlights: [
         'Complete Multi-AZ Network Isolation: One VPC (10.0.0.0/16) across 2 AZs with public subnets (ALB, NAT), private application subnets (EKS), and strictly isolated private database subnets without internet routes.',
@@ -601,20 +651,60 @@ spec:
     },
   ],
 
-  // Verified Work Experience from Resume (100% accurate, no placeholders!)
+  // Verified Work Experience (Accenture, Infosys, SOFFRONT)
   experience: [
+    {
+      company: 'Accenture',
+      role: 'Senior Software Engineer',
+      location: 'Bhubaneswar, India',
+      period: '2024 – Present',
+      highlights: [
+        'Architect and develop enterprise-scale microservices using Java 21, Spring Boot 3, and React.js with asynchronous processing, clean domain-driven boundaries, and fault tolerance.',
+        'Design and deploy multi-tier cloud infrastructure on AWS: containerized workloads across Amazon EKS (Kubernetes), EC2 compute instances, and AWS Elastic Beanstalk.',
+        'Configure highly available persistence with Amazon RDS (PostgreSQL) Multi-AZ, automated snapshots, KMS encryption at rest, and Amazon S3 bucket object storage.',
+        'Implement resilient asynchronous messaging architectures leveraging Amazon SQS (FIFO queues, dead-letter queues) and Amazon SNS topic fan-out pipelines.',
+        'Design secure enterprise networking topologies: Amazon VPC with public and private subnets, NAT Gateways, Internet Gateways, Security Groups, and network ACLs.',
+        'Orchestrate global edge delivery and DNS routing via Amazon CloudFront (CDN), Route 53 latency-based routing, and TLS/SSL certificate automation with AWS Certificate Manager (ACM).',
+        'Enforce least-privilege security posture utilizing AWS IAM roles and policies, AWS KMS customer-managed encryption keys, and fine-grained Security Group ingress/egress rules.',
+        'Deploy serverless event-driven micro-functions with AWS Lambda and real-time observability via Amazon CloudWatch metrics, alarms, and log groups.',
+        'Build and maintain automated CI/CD pipelines in GitLab CI/CD with Docker containerization, automated unit/integration test suites, and GitOps deployments onto Amazon EKS.',
+      ],
+      technologies: [
+        'Java 21',
+        'Spring Boot 3',
+        'Microservices',
+        'React.js',
+        'Amazon EKS',
+        'Kubernetes',
+        'Docker',
+        'AWS EC2',
+        'Elastic Beanstalk',
+        'Amazon RDS (PostgreSQL)',
+        'Amazon SQS & SNS',
+        'CloudFront (CDN)',
+        'Route 53',
+        'AWS Lambda',
+        'Amazon S3',
+        'Amazon VPC & NAT',
+        'AWS IAM & KMS',
+        'AWS Certificate Manager (ACM)',
+        'CloudWatch',
+        'GitLab CI/CD',
+      ],
+      isPlaceholder: false,
+    },
     {
       company: 'Infosys',
       role: 'Technology Analyst',
       location: 'Bangalore, India',
-      period: 'August 2021 – Present',
+      period: 'August 2021 – 2024',
       highlights: [
-        'Design, develop, and maintain high-performance microservices-based applications following industry best practices for scalability, modularity, and fault tolerance.',
-        'Architect event-driven distributed systems and real-time data streaming pipelines using Apache Kafka and Confluent Kafka Control Center for inter-service communication.',
-        'Design normalized schemas and write optimized HQL queries using Hibernate ORM across PostgreSQL and Oracle databases.',
-        'Implement automated CI/CD pipelines using Jenkins, Docker, and Kubernetes for containerized service delivery.',
-        'Develop and maintain unit tests, integration tests, and end-to-end tests using Mockito and JUnit, conducting defect analysis and bug fixing across DEV, SIT, and UAT environments.',
-        'Collaborate closely with cross-functional teams, including product managers, architects, and frontend developers in Agile/Scrum delivery sprints.',
+        'Designed, developed, and maintained high-performance microservices-based applications for the national Income Tax Return Processing Engine (CPC 2.0).',
+        'Architected event-driven distributed systems and real-time data streaming pipelines using Apache Kafka and Confluent Kafka Control Center for inter-service communication.',
+        'Designed normalized schemas and wrote optimized HQL queries using Hibernate ORM across PostgreSQL and Oracle databases with Redis caching.',
+        'Implemented automated CI/CD pipelines using Jenkins, Docker, and Kubernetes for containerized service delivery.',
+        'Developed and maintained unit tests, integration tests, and end-to-end tests using Mockito and JUnit, conducting defect analysis across DEV, SIT, and UAT environments.',
+        'Collaborated closely with cross-functional architecture and product delivery teams in Agile/Scrum delivery sprints.',
       ],
       technologies: [
         'Java 11',
@@ -627,7 +717,7 @@ spec:
         'Redis',
         'Docker',
         'Kubernetes',
-        'Jenkins',
+        'Jenkins CI/CD',
         'Dynatrace',
         'SonarLint',
         'Mockito',

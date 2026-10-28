@@ -1,4 +1,5 @@
-import { ArrowRight, Mail, Phone, FileText, Layers, Cpu, ShieldCheck, MapPin } from 'lucide-react';
+import { ArrowRight, Mail, Phone, FileText, ShieldCheck, MapPin } from 'lucide-react';
+import { GithubIcon } from '../components/common/Icons';
 import type { ProfileData } from '../types/portfolio';
 import { SceneCanvas } from '../components/3d/SceneCanvas';
 import { HolographicCore3D } from '../components/3d/HolographicCore3D';
@@ -46,7 +47,7 @@ export function HeroSection({ profile }: HeroSectionProps) {
                 </span>
                 <span className={`text-xs ${isLight ? 'text-slate-400' : 'text-slate-600'}`}>•</span>
                 <span className={`text-xs font-mono font-semibold ${isLight ? 'text-sky-800' : 'text-sky-400'}`}>
-                  Technology Analyst @ Infosys
+                  Senior Software Engineer @ Accenture
                 </span>
                 {profile.totalExperience && (
                   <>
@@ -145,6 +146,21 @@ export function HeroSection({ profile }: HeroSectionProps) {
                   <span>{profile.phone}</span>
                 </a>
               )}
+
+              {profile.socialLinks.github && (
+                <a
+                  href={profile.socialLinks.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`transition-colors flex items-center gap-1.5 ${
+                    isLight ? 'text-slate-800 hover:text-sky-700' : 'text-slate-400 hover:text-sky-300'
+                  }`}
+                  title="GitHub Profile (@sameerasha)"
+                >
+                  <GithubIcon className="w-3.5 h-3.5 text-sky-500" />
+                  <span>github.com/sameerasha</span>
+                </a>
+              )}
             </div>
 
             {/* Confirmed Skills Ticker */}
@@ -179,10 +195,10 @@ export function HeroSection({ profile }: HeroSectionProps) {
                   isLight ? 'bg-sky-300/35' : 'bg-sky-500/18'
                 }`}
               />
-              {/* Secondary Harmonic Indigo Bloom */}
+              {/* Secondary Harmonic Indigo & Amber Bloom */}
               <div
                 className={`absolute w-[260px] sm:w-[340px] h-[260px] sm:h-[340px] rounded-full blur-[70px] transition-all duration-700 ${
-                  isLight ? 'bg-indigo-300/25' : 'bg-indigo-600/18'
+                  isLight ? 'bg-orange-300/20' : 'bg-orange-600/15'
                 }`}
               />
               {/* Subtle Concentric Orbital Telemetry Ring */}
@@ -199,43 +215,21 @@ export function HeroSection({ profile }: HeroSectionProps) {
                 ? 'bg-white/95 border-slate-200 text-slate-800 shadow-slate-200/50'
                 : 'bg-slate-950/85 border-slate-800 text-sky-400 shadow-[0_0_20px_rgba(56,189,248,0.2)]'
             }`}>
-              <span className="w-1.5 h-1.5 rounded-full bg-sky-400 animate-ping" />
-              <span>CPC 2.0 // EVENT-DRIVEN ENGINE CORE</span>
+              <span className="w-1.5 h-1.5 rounded-full bg-orange-400 animate-ping" />
+              <span>AWS 3-TIER ARCHITECTURE // CLOUD & EVENT-DRIVEN CORE</span>
             </div>
 
             {/* 3D Scene Container (Seamless Feathered Radial Mask, 100% Unclipped Gyro Orbit) */}
             <div
               className="relative w-full max-w-[480px] lg:max-w-[500px] h-[360px] sm:h-[480px] lg:h-[500px] flex items-center justify-center"
               style={{
-                WebkitMaskImage: 'radial-gradient(circle at 50% 50%, rgba(0,0,0,1) 68%, rgba(0,0,0,0.85) 84%, rgba(0,0,0,0) 100%)',
-                maskImage: 'radial-gradient(circle at 50% 50%, rgba(0,0,0,1) 68%, rgba(0,0,0,0.85) 84%, rgba(0,0,0,0) 100%)',
+                WebkitMaskImage: 'radial-gradient(circle at 50% 50%, rgba(0,0,0,1) 70%, rgba(0,0,0,0.85) 86%, rgba(0,0,0,0) 100%)',
+                maskImage: 'radial-gradient(circle at 50% 50%, rgba(0,0,0,1) 70%, rgba(0,0,0,0.85) 86%, rgba(0,0,0,0) 100%)',
               }}
             >
-              <SceneCanvas cameraPosition={[0, 0, 6.6]} fov={40} className="w-full h-full">
+              <SceneCanvas cameraPosition={[0, 0, 7.0]} fov={38} className="w-full h-full">
                 <HolographicCore3D />
               </SceneCanvas>
-
-              {/* Floating Spatial Badge Left */}
-              <div className={`absolute top-[20%] -left-1 sm:-left-3 z-20 hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-xl border text-xs font-mono backdrop-blur-xl shadow-xl transition-all ${
-                isLight
-                  ? 'bg-white/95 border-slate-200 text-slate-800 shadow-slate-200/60'
-                  : 'bg-slate-950/90 border-slate-800 text-slate-200 shadow-black/80'
-              }`}>
-                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                <Cpu className="w-3.5 h-3.5 text-sky-500" />
-                <span>Spring Boot 3 + Java 11</span>
-              </div>
-
-              {/* Floating Spatial Badge Right */}
-              <div className={`absolute bottom-[20%] -right-1 sm:-right-3 z-20 hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-xl border text-xs font-mono backdrop-blur-xl shadow-xl transition-all ${
-                isLight
-                  ? 'bg-white/95 border-slate-200 text-slate-800 shadow-slate-200/60'
-                  : 'bg-slate-950/90 border-slate-800 text-slate-200 shadow-black/80'
-              }`}>
-                <span className="w-2 h-2 rounded-full bg-sky-500 animate-pulse" />
-                <Layers className="w-3.5 h-3.5 text-indigo-500" />
-                <span>Apache Kafka Broker</span>
-              </div>
             </div>
 
             {/* Bottom Observatory Anchor Link */}

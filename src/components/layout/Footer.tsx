@@ -1,4 +1,5 @@
 import { Mail, ExternalLink, ShieldCheck, Terminal, ArrowUp, FileText } from 'lucide-react';
+import { GithubIcon } from '../common/Icons';
 import type { ProfileData } from '../../types/portfolio';
 import { useTheme } from '../../context/ThemeContext';
 
@@ -40,7 +41,7 @@ export function Footer({ profile }: FooterProps) {
                 {displayName}
               </div>
               <div className={`text-[11px] font-semibold ${isLight ? 'text-sky-800' : 'text-sky-400'}`}>
-                Technology Analyst @ Infosys • Full Stack Architect
+                Senior Software Engineer @ Accenture • Java 21 & AWS Cloud Architect
               </div>
             </div>
           </div>
@@ -135,6 +136,7 @@ export function Footer({ profile }: FooterProps) {
                     : 'bg-slate-900 border-slate-800 text-slate-300 hover:border-slate-700'
                 }`}
               >
+                <GithubIcon className="w-3.5 h-3.5 text-sky-500" />
                 <span>GitHub</span>
                 <ExternalLink className="w-3 h-3 text-slate-400" />
               </a>

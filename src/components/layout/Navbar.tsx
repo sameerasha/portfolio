@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Menu, X, FileText, Settings, Terminal, Sun, Moon } from 'lucide-react';
+import { GithubIcon } from '../common/Icons';
 import type { ProfileData } from '../../types/portfolio';
 import { useTheme } from '../../context/ThemeContext';
 
@@ -70,7 +71,7 @@ export function Navbar({ profile, onOpenConfigDrawer }: NavbarProps) {
               <span className={`text-[10px] font-mono tracking-wider font-semibold ${
                 isLight ? 'text-slate-700' : 'text-slate-400'
               }`}>
-                Java • Kafka • React Architect
+                Java 21 • AWS • React • Microservices Architect
               </span>
             </div>
           </a>
@@ -116,6 +117,24 @@ export function Navbar({ profile, onOpenConfigDrawer }: NavbarProps) {
                 <Sun className="w-4 h-4 text-amber-300 transition-transform rotate-0 hover:rotate-45" />
               )}
             </button>
+
+            {/* GitHub Profile Button */}
+            {profile.socialLinks.github && (
+              <a
+                href={profile.socialLinks.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                title="GitHub Profile (@sameerasha)"
+                aria-label="GitHub Profile"
+                className={`flex items-center justify-center w-9 h-9 rounded-full border transition-all ${
+                  isLight
+                    ? 'bg-white hover:bg-slate-100 border-slate-300 text-slate-800 hover:text-sky-600 shadow-sm hover:scale-105'
+                    : 'bg-slate-900/80 hover:bg-slate-800 border-slate-750 text-slate-200 hover:text-sky-400 shadow-inner hover:scale-105'
+                }`}
+              >
+                <GithubIcon className="w-4 h-4" />
+              </a>
+            )}
 
             {/* Quick Profile Config Helper Trigger */}
             <button
@@ -222,6 +241,23 @@ export function Navbar({ profile, onOpenConfigDrawer }: NavbarProps) {
           <div className={`pt-4 border-t flex flex-col gap-2 ${
             isLight ? 'border-slate-200' : 'border-slate-800/80'
           }`}>
+            {profile.socialLinks.github && (
+              <a
+                href={profile.socialLinks.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className={`flex items-center justify-center gap-2 w-full py-2.5 rounded-lg text-xs font-mono font-semibold border transition-all ${
+                  isLight
+                    ? 'bg-slate-100 border-slate-300 text-slate-800 hover:bg-slate-200'
+                    : 'bg-slate-900 border-slate-750 text-slate-200 hover:bg-slate-800'
+                }`}
+              >
+                <GithubIcon className="w-4 h-4 text-sky-500" />
+                <span>GitHub Profile (@sameerasha)</span>
+              </a>
+            )}
+
             {profile.resume.available && profile.resume.url ? (
               <a
                 href={profile.resume.url}
