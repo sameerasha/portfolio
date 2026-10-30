@@ -7,10 +7,12 @@ interface FooterProps {
   profile: ProfileData;
 }
 
+const CURRENT_YEAR = new Date().getFullYear();
+
 export function Footer({ profile }: FooterProps) {
   const { theme } = useTheme();
   const isLight = theme === 'light';
-  const currentYear = new Date().getFullYear();
+  const currentYear = CURRENT_YEAR;
   const displayName = profile.name.trim() || profile.fallbackTitle;
 
   const scrollToTop = () => {

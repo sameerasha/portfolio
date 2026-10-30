@@ -79,10 +79,10 @@ export function ContactSection({ profile, onOpenConfigDrawer }: ContactSectionPr
           {/* Left Column: Direct Communication Channels */}
           <div className="lg:col-span-5 space-y-6">
             {/* Primary Verified Channels Card */}
-            <div className={`animate-on-scroll rounded-3xl border p-7 sm:p-8 backdrop-blur-md relative overflow-hidden transition-all duration-300 ${
+            <div className={`animate-on-scroll rounded-3xl border p-7 sm:p-8 relative overflow-hidden transition-all duration-300 ${
               isLight
-                ? 'bg-white/95 border-slate-200/90 shadow-[0_20px_50px_rgba(15,23,42,0.06),0_0_0_1px_rgba(15,23,42,0.03)]'
-                : 'bg-slate-900/80 border-slate-800'
+                ? 'backdrop-blur-md bg-white/95 border-slate-200/90 shadow-[0_20px_50px_rgba(15,23,42,0.06),0_0_0_1px_rgba(15,23,42,0.03)]'
+                : 'bg-[#0d121f] border-slate-800 shadow-2xl shadow-black/70'
             }`}>
               <div className={`absolute top-0 right-0 w-40 h-40 rounded-full blur-2xl pointer-events-none ${
                 isLight ? 'bg-sky-200/20' : 'bg-sky-500/10'
@@ -139,7 +139,7 @@ export function ContactSection({ profile, onOpenConfigDrawer }: ContactSectionPr
                 {/* Phone row */}
                 {profile.phone && (
                   <div className={`p-3 rounded-xl border flex items-center justify-between gap-3 font-mono text-xs ${
-                    isLight ? 'bg-slate-50 border-slate-200' : 'bg-slate-950/90 border-slate-800'
+                    isLight ? 'bg-slate-50 border-slate-200' : 'bg-[#141b2d] border-slate-800'
                   }`}>
                     <div className="flex items-center gap-2 truncate">
                       <Phone className="w-4 h-4 text-emerald-500 shrink-0" />
@@ -172,7 +172,7 @@ export function ContactSection({ profile, onOpenConfigDrawer }: ContactSectionPr
                 {/* Location row */}
                 {profile.location && (
                   <div className={`p-3 rounded-xl border flex items-center gap-2 font-mono text-xs ${
-                    isLight ? 'bg-slate-50 border-slate-200 text-slate-600' : 'bg-slate-950/90 border-slate-800 text-slate-400'
+                    isLight ? 'bg-slate-50 border-slate-200 text-slate-600' : 'bg-[#141b2d] border-slate-800 text-slate-400'
                   }`}>
                     <MapPin className="w-4 h-4 text-indigo-500 shrink-0" />
                     <span>Current: {profile.location} (Permanent: Cuttack, Odisha)</span>
@@ -205,7 +205,7 @@ export function ContactSection({ profile, onOpenConfigDrawer }: ContactSectionPr
 
             {/* Resume & Social Links Card */}
             <div className={`animate-on-scroll rounded-2xl border p-6 space-y-4 transition-colors ${
-              isLight ? 'bg-white border-slate-200 shadow-sm' : 'bg-slate-900/50 border-slate-800/80'
+              isLight ? 'bg-white border-slate-200 shadow-sm' : 'bg-[#0d121f] border-slate-800 shadow-xl shadow-black/60'
             }`}>
               <div className="flex items-center justify-between">
                 <h4 className={`text-sm font-bold font-mono uppercase tracking-wider ${
@@ -226,7 +226,7 @@ export function ContactSection({ profile, onOpenConfigDrawer }: ContactSectionPr
 
               {/* Resume download integration */}
               <div className={`p-3.5 rounded-xl border flex items-center justify-between gap-3 ${
-                isLight ? 'bg-sky-50/60 border-sky-200' : 'bg-slate-950/70 border-slate-855'
+                isLight ? 'bg-sky-50/60 border-sky-200' : 'bg-[#121829] border-slate-800'
               }`}>
                 <div>
                   <div className={`text-xs font-semibold ${isLight ? 'text-slate-900' : 'text-white'}`}>
@@ -251,11 +251,11 @@ export function ContactSection({ profile, onOpenConfigDrawer }: ContactSectionPr
 
               {/* GitHub */}
               <div className={`p-3.5 rounded-xl border flex items-center justify-between gap-3 ${
-                isLight ? 'bg-slate-50 border-slate-200' : 'bg-slate-955/70 border-slate-800'
+                isLight ? 'bg-slate-50 border-slate-200' : 'bg-[#121829] border-slate-800'
               }`}>
                 <div className="flex items-center gap-3">
                   <div className={`w-9 h-9 rounded-lg flex items-center justify-center shrink-0 border ${
-                    isLight ? 'bg-white border-slate-200 text-slate-900 shadow-sm' : 'bg-slate-900 border-slate-800 text-white'
+                    isLight ? 'bg-white border-slate-200 text-slate-900 shadow-sm' : 'bg-[#182035] border-slate-800 text-white'
                   }`}>
                     <GithubIcon className="w-4 h-4 text-sky-500" />
                   </div>
@@ -272,7 +272,7 @@ export function ContactSection({ profile, onOpenConfigDrawer }: ContactSectionPr
                     href={profile.socialLinks.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono font-semibold bg-slate-900 hover:bg-slate-800 text-white dark:bg-slate-800 dark:hover:bg-slate-700 transition-all shadow-sm"
+                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono font-semibold bg-slate-900 hover:bg-slate-800 text-white dark:bg-[#182035] dark:hover:bg-[#202b47] transition-all shadow-sm"
                   >
                     <span>Visit</span>
                     <ExternalLink className="w-3 h-3 text-slate-400" />
@@ -292,7 +292,7 @@ export function ContactSection({ profile, onOpenConfigDrawer }: ContactSectionPr
 
               {/* LinkedIn */}
               <div className={`p-3.5 rounded-xl border flex items-center justify-between gap-3 ${
-                isLight ? 'bg-slate-50 border-slate-200' : 'bg-slate-950/70 border-slate-855'
+                isLight ? 'bg-slate-50 border-slate-200' : 'bg-[#121829] border-slate-800'
               }`}>
                 <div>
                   <div className={`text-xs font-semibold ${isLight ? 'text-slate-900' : 'text-white'}`}>LinkedIn</div>
@@ -328,10 +328,10 @@ export function ContactSection({ profile, onOpenConfigDrawer }: ContactSectionPr
 
           {/* Right Column: Pre-Configured Contact Dispatcher */}
           <div className="lg:col-span-7">
-            <div className={`animate-on-scroll rounded-3xl border p-7 sm:p-9 backdrop-blur-md transition-all duration-300 ${
+            <div className={`animate-on-scroll rounded-3xl border p-7 sm:p-9 transition-all duration-300 ${
               isLight
-                ? 'bg-white/95 border-slate-200/90 shadow-[0_20px_50px_rgba(15,23,42,0.06),0_0_0_1px_rgba(15,23,42,0.03)]'
-                : 'bg-slate-900/60 border-slate-800'
+                ? 'backdrop-blur-md bg-white/95 border-slate-200/90 shadow-[0_20px_50px_rgba(15,23,42,0.06),0_0_0_1px_rgba(15,23,42,0.03)]'
+                : 'bg-[#0d121f] border-slate-800 shadow-2xl shadow-black/70'
             }`}>
               <div className="flex items-center gap-2 mb-2">
                 <Terminal className={`w-4 h-4 ${isLight ? 'text-sky-600' : 'text-sky-400'}`} />
@@ -362,10 +362,10 @@ export function ContactSection({ profile, onOpenConfigDrawer }: ContactSectionPr
                       value={formState.name}
                       onChange={(e) => setFormState({ ...formState, name: e.target.value })}
                       placeholder="e.g. Lead Technical Recruiter"
-                      className={`w-full px-3.5 py-2.5 rounded-xl border text-sm font-medium transition-colors focus:outline-none focus:border-sky-500 ${
+                      className={`w-full px-3.5 py-2.5 rounded-xl border text-base sm:text-sm font-medium transition-colors focus:outline-none focus:border-sky-500 ${
                         isLight
                           ? 'bg-white border-slate-300 text-slate-950 placeholder-slate-400 shadow-sm'
-                          : 'bg-slate-950/80 border-slate-855 text-white placeholder-slate-600'
+                          : 'bg-[#090d18] border-slate-800 text-white placeholder-slate-600'
                       }`}
                     />
                   </div>
@@ -384,10 +384,10 @@ export function ContactSection({ profile, onOpenConfigDrawer }: ContactSectionPr
                       value={formState.senderEmail}
                       onChange={(e) => setFormState({ ...formState, senderEmail: e.target.value })}
                       placeholder="recruiter@company.com"
-                      className={`w-full px-3.5 py-2.5 rounded-xl border text-sm font-medium transition-colors focus:outline-none focus:border-sky-500 ${
+                      className={`w-full px-3.5 py-2.5 rounded-xl border text-base sm:text-sm font-medium transition-colors focus:outline-none focus:border-sky-500 ${
                         isLight
                           ? 'bg-white border-slate-300 text-slate-950 placeholder-slate-400 shadow-sm'
-                          : 'bg-slate-950/80 border-slate-855 text-white placeholder-slate-600'
+                          : 'bg-[#090d18] border-slate-800 text-white placeholder-slate-600'
                       }`}
                     />
                   </div>
@@ -407,10 +407,10 @@ export function ContactSection({ profile, onOpenConfigDrawer }: ContactSectionPr
                     value={formState.subject}
                     onChange={(e) => setFormState({ ...formState, subject: e.target.value })}
                     placeholder="Full Stack / Java Microservices Opportunity"
-                    className={`w-full px-3.5 py-2.5 rounded-xl border text-sm font-medium transition-colors focus:outline-none focus:border-sky-500 ${
+                    className={`w-full px-3.5 py-2.5 rounded-xl border text-base sm:text-sm font-medium transition-colors focus:outline-none focus:border-sky-500 ${
                       isLight
                         ? 'bg-white border-slate-300 text-slate-950 placeholder-slate-400 shadow-sm'
-                        : 'bg-slate-950/80 border-slate-855 text-white placeholder-slate-600'
+                        : 'bg-[#090d18] border-slate-800 text-white placeholder-slate-600'
                     }`}
                   />
                 </div>
@@ -429,10 +429,10 @@ export function ContactSection({ profile, onOpenConfigDrawer }: ContactSectionPr
                     value={formState.message}
                     onChange={(e) => setFormState({ ...formState, message: e.target.value })}
                     placeholder="Hi Rabinarayan, I reviewed your microservices and full-stack engineering portfolio and would like to connect regarding..."
-                    className={`w-full px-3.5 py-2.5 rounded-xl border text-sm transition-colors focus:outline-none focus:border-sky-500 resize-none ${
+                    className={`w-full px-3.5 py-2.5 rounded-xl border text-base sm:text-sm transition-colors focus:outline-none focus:border-sky-500 resize-none ${
                       isLight
                         ? 'bg-slate-50 border-slate-200 text-slate-900 placeholder-slate-400'
-                        : 'bg-slate-950/80 border-slate-855 text-white placeholder-slate-600'
+                        : 'bg-[#090d18] border-slate-800 text-white placeholder-slate-600'
                     }`}
                   />
                 </div>

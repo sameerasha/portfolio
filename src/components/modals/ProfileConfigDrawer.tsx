@@ -106,7 +106,7 @@ export const profileData: ProfileData = {
             {checklist.map((c, i) => (
               <div
                 key={i}
-                className="p-3.5 rounded-xl border flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-slate-950/60 border-slate-850"
+                className="p-3.5 rounded-xl border flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-[#0e1422] border-slate-800 shadow-sm"
               >
                 <div className="flex items-start gap-3">
                   {c.isCompleted ? (

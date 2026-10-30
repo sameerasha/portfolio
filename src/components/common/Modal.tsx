@@ -62,14 +62,14 @@ export function Modal({
         className={`relative w-full ${maxWidth} max-h-[90vh] flex flex-col rounded-2xl border shadow-2xl z-10 overflow-hidden animate-in zoom-in-95 duration-200 transition-colors ${
           isLight
             ? 'bg-white border-slate-200 text-slate-800'
-            : 'bg-slate-900 border-slate-800 text-slate-300'
+            : 'bg-[#090d16] border-slate-800 text-slate-300 shadow-2xl shadow-black/90'
         }`}
       >
         {/* Header */}
-        <div className={`flex items-center justify-between px-6 py-4 border-b sticky top-0 z-20 backdrop-blur-md ${
+        <div className={`flex items-center justify-between px-6 py-4 border-b sticky top-0 z-20 ${
           isLight
-            ? 'border-slate-200 bg-slate-50/90'
-            : 'border-slate-800 bg-slate-950/80'
+            ? 'border-slate-200 bg-slate-50/90 backdrop-blur-md'
+            : 'border-slate-800 bg-[#0d121f]'
         }`}>
           <div>
             <h3 id="modal-headline" className={`text-xl font-bold tracking-tight ${

@@ -1,4 +1,4 @@
-import { useRef, useMemo } from 'react';
+import { useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { Float } from '@react-three/drei';
 import * as THREE from 'three';
@@ -9,6 +9,21 @@ interface SystemCore3DProps {
 }
 
 const scratchPointer = new THREE.Vector3();
+const PARTICLES_COUNT = 180;
+
+// Pre-computed spherical telemetry particle coordinates (deterministic, zero GC overhead)
+const INITIAL_PARTICLE_POSITIONS = (() => {
+  const pos = new Float32Array(PARTICLES_COUNT * 3);
+  for (let i = 0; i < PARTICLES_COUNT; i++) {
+    const phi = Math.acos(1 - (2 * (i + 0.5)) / PARTICLES_COUNT);
+    const theta = Math.PI * (1 + Math.sqrt(5)) * i;
+    const radius = 2.4 + ((i * 137.5) % 16) / 10;
+    pos[i * 3] = radius * Math.sin(phi) * Math.cos(theta);
+    pos[i * 3 + 1] = radius * Math.sin(phi) * Math.sin(theta);
+    pos[i * 3 + 2] = radius * Math.cos(phi);
+  }
+  return pos;
+})();
 
 export function SystemCore3D({ reducedMotion = false }: SystemCore3DProps) {
   const { theme } = useTheme();
@@ -21,19 +36,7 @@ export function SystemCore3D({ reducedMotion = false }: SystemCore3DProps) {
   const groupRef = useRef<THREE.Group>(null!);
   const particlesRef = useRef<THREE.Points>(null!);
 
-  const particlesCount = 180;
-  const particlePositions = useMemo(() => {
-    const pos = new Float32Array(particlesCount * 3);
-    for (let i = 0; i < particlesCount; i++) {
-      const radius = 2.4 + Math.random() * 1.6;
-      const theta = Math.random() * Math.PI * 2;
-      const phi = Math.acos(Math.random() * 2 - 1);
-      pos[i * 3] = radius * Math.sin(phi) * Math.cos(theta);
-      pos[i * 3 + 1] = radius * Math.sin(phi) * Math.sin(theta);
-      pos[i * 3 + 2] = radius * Math.cos(phi);
-    }
-    return pos;
-  }, []);
+  const particlePositions = INITIAL_PARTICLE_POSITIONS;
 
   useFrame((state, delta) => {
     if (reducedMotion) return;

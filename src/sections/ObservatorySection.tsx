@@ -26,9 +26,9 @@ import { SectionHeading } from '../components/common/SectionHeading';
 import { useTheme } from '../context/ThemeContext';
 import { usePrefersReducedMotion } from '../hooks/usePrefersReducedMotion';
 
-export type ArchitecturePlatform = 'aws' | 'cpc2';
+type ArchitecturePlatform = 'aws' | 'cpc2';
 
-export interface ArchitectureNode {
+interface ArchitectureNode {
   id: string;
   name: string;
   category: 'ingestion' | 'broker' | 'compute' | 'persistence' | 'storage' | 'observability';
@@ -54,7 +54,7 @@ interface ServiceIconMeta {
   glowColor: string;
 }
 
-export const SERVICE_ICON_MAP: Record<string, ServiceIconMeta> = {
+const SERVICE_ICON_MAP: Record<string, ServiceIconMeta> = {
   'cloudfront-s3': {
     badge: 'S3+CDN',
     icon: Cloud,
@@ -214,7 +214,7 @@ export const SERVICE_ICON_MAP: Record<string, ServiceIconMeta> = {
 /**
  * Clean Minimalist Round AWS Service Icon Badge (Zero extraneous dots or spheres)
  */
-export function MinimalRoundIcon({
+function MinimalRoundIcon({
   nodeId,
   size = 'md',
   isLight = false,
@@ -930,32 +930,41 @@ function ArchitecturalNode3D({
   );
 }
 
+const DUST_COUNT = 140;
+const DUST_POSITIONS = (() => {
+  const pos = new Float32Array(DUST_COUNT * 3);
+  for (let i = 0; i < DUST_COUNT; i++) {
+    const rx = Math.sin(i * 15.731) * 43758.5453;
+    const ry = Math.sin(i * 47.913) * 43758.5453;
+    const rz = Math.sin(i * 89.177) * 43758.5453;
+    pos[i * 3] = (rx - Math.floor(rx) - 0.5) * 14;
+    pos[i * 3 + 1] = (ry - Math.floor(ry) - 0.5) * 9;
+    pos[i * 3 + 2] = (rz - Math.floor(rz) - 0.5) * 8;
+  }
+  return pos;
+})();
+
 /**
- * Atmospheric Cybernetic Space Dust
+ * Atmospheric Cybernetic Space Dust (deterministic coordinates, memoized colors)
  */
 function AtmosphericDust({ isLight }: { isLight: boolean }) {
   const pointsRef = useRef<THREE.Points>(null!);
-  const count = 140;
 
-  const [positions, colors] = useMemo(() => {
-    const pos = new Float32Array(count * 3);
-    const col = new Float32Array(count * 3);
+  const positions = DUST_POSITIONS;
+  const colors = useMemo(() => {
+    const col = new Float32Array(DUST_COUNT * 3);
     const c1 = new THREE.Color(isLight ? '#0284c7' : '#38bdf8');
     const c2 = new THREE.Color(isLight ? '#6366f1' : '#818cf8');
     const c3 = new THREE.Color(isLight ? '#ea580c' : '#f97316');
     const palette = [c1, c2, c3];
 
-    for (let i = 0; i < count; i++) {
-      pos[i * 3] = (Math.random() - 0.5) * 14;
-      pos[i * 3 + 1] = (Math.random() - 0.5) * 9;
-      pos[i * 3 + 2] = (Math.random() - 0.5) * 8;
-
+    for (let i = 0; i < DUST_COUNT; i++) {
       const c = palette[i % palette.length];
       col[i * 3] = c.r;
       col[i * 3 + 1] = c.g;
       col[i * 3 + 2] = c.b;
     }
-    return [pos, col];
+    return col;
   }, [isLight]);
 
   useFrame((_, delta) => {
@@ -1144,7 +1153,7 @@ function SceneCameraManager({
       enablePan={true}
       enableDamping={true}
       dampingFactor={0.06}
-      autoRotate={isAutoRotating && !burstActive && !focusedPosition && !targetCamPos.current}
+      autoRotate={isAutoRotating && !burstActive && !focusedPosition}
       autoRotateSpeed={0.65}
       minPolarAngle={0.12}
       maxPolarAngle={Math.PI / 2 + 0.12}
@@ -1249,9 +1258,9 @@ export function ObservatorySection() {
     setFocusedNodeId(null);
     setFilter('all');
     setCameraPreset('default');
-    setPresetKey(Date.now());
+    setPresetKey((k) => k + 1);
     setIsAutoRotating(true);
-    setResetSignal(Date.now());
+    setResetSignal((s) => s + 1);
     setIsResetting(true);
     setActiveNode(platform === 'aws' ? AWS_NODES[2] : CPC2_NODES[1]);
     setTimeout(() => setIsResetting(false), 700);
@@ -1262,8 +1271,8 @@ export function ObservatorySection() {
     setFilter('all');
     setFocusedNodeId(null);
     setCameraPreset('default');
-    setPresetKey(Date.now());
-    setResetSignal(Date.now());
+    setPresetKey((k) => k + 1);
+    setResetSignal((s) => s + 1);
     setActiveNode(newPlatform === 'aws' ? AWS_NODES[2] : CPC2_NODES[1]);
   };
 
@@ -1303,8 +1312,8 @@ export function ObservatorySection() {
       setFilter('all');
       setFocusedNodeId(null);
       setCameraPreset('default');
-      setPresetKey(Date.now());
-      setResetSignal(Date.now());
+      setPresetKey((k) => k + 1);
+      setResetSignal((s) => s + 1);
     } else {
       const match = currentNodes.find((n) => n.id === tab.nodeId);
       if (match) {
@@ -1361,7 +1370,11 @@ export function ObservatorySection() {
         </div>
 
         {/* Platform Architecture Selector */}
-        <div className="flex flex-wrap items-center gap-3 mb-6 p-1.5 rounded-2xl border backdrop-blur-xl transition-all w-fit bg-slate-900/40 border-slate-800/80 dark:bg-slate-950/60">
+        <div className={`flex flex-col sm:flex-row sm:items-center gap-2.5 sm:gap-3 mb-6 p-1.5 rounded-2xl border transition-all w-full sm:w-fit ${
+          isLight
+            ? 'bg-white/90 border-slate-200 backdrop-blur-xl shadow-sm'
+            : 'bg-[#0d121f] border-slate-800 shadow-xl shadow-black/60'
+        }`}>
           <span className={`text-xs font-mono font-bold px-3 py-1 flex items-center gap-1.5 ${isLight ? 'text-slate-800' : 'text-slate-300'}`}>
             <Cloud className="w-4 h-4 text-sky-500" />
             <span>Architecture Mode:</span>
@@ -1370,7 +1383,7 @@ export function ObservatorySection() {
           <button
             type="button"
             onClick={() => handleSelectPlatform('aws')}
-            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-mono font-bold transition-all ${
+            className={`flex items-center justify-center gap-2 px-4 py-2.5 sm:py-2 rounded-xl text-xs font-mono font-bold transition-all w-full sm:w-auto text-center ${
               platform === 'aws'
                 ? isLight
                   ? 'bg-orange-500 text-white shadow-md shadow-orange-500/25 scale-[1.02]'
@@ -1381,13 +1394,13 @@ export function ObservatorySection() {
             }`}
           >
             <span className="w-2 h-2 rounded-full bg-orange-400 animate-pulse" />
-            <span>AWS Cloud-Native Microservices (AWS EKS • MSK • Aurora • S3 • Redis)</span>
+            <span>AWS Cloud-Native Microservices (EKS • MSK • RDS • S3)</span>
           </button>
 
           <button
             type="button"
             onClick={() => handleSelectPlatform('cpc2')}
-            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-mono font-bold transition-all ${
+            className={`flex items-center justify-center gap-2 px-4 py-2.5 sm:py-2 rounded-xl text-xs font-mono font-bold transition-all w-full sm:w-auto text-center ${
               platform === 'cpc2'
                 ? isLight
                   ? 'bg-sky-600 text-white shadow-md shadow-sky-500/25 scale-[1.02]'
@@ -1398,13 +1411,13 @@ export function ObservatorySection() {
             }`}
           >
             <span className="w-2 h-2 rounded-full bg-sky-400 animate-pulse" />
-            <span>CPC 2.0 Enterprise Tax Processing (Kafka • Spring Boot • Oracle DB)</span>
+            <span>CPC 2.0 Enterprise Engine (Kafka • Spring • Oracle)</span>
           </button>
         </div>
 
         {/* Cluster Filter Tabs with Instant Node Focus */}
-        <div className="animate-on-scroll flex flex-wrap items-center gap-2 mb-6 text-xs font-mono">
-          <span className={`text-[11px] uppercase mr-2 font-bold ${isLight ? 'text-slate-800' : 'text-slate-400'}`}>
+        <div className="animate-on-scroll flex overflow-x-auto sm:flex-wrap items-center gap-2 mb-6 pb-2 sm:pb-0 text-xs font-mono">
+          <span className={`text-[11px] uppercase mr-2 font-bold shrink-0 ${isLight ? 'text-slate-800' : 'text-slate-400'}`}>
             Cluster View:
           </span>
           {clusterTabs.map((tab) => {
@@ -1414,14 +1427,14 @@ export function ObservatorySection() {
                 key={tab.id}
                 type="button"
                 onClick={() => handleSelectClusterTab(tab)}
-                className={`px-3 py-1.5 rounded-lg border font-bold transition-all ${
+                className={`px-3 py-1.5 rounded-lg border font-bold shrink-0 transition-all ${
                   isTabActive
                     ? isLight
                       ? 'bg-sky-100 text-sky-950 border-sky-400 font-extrabold shadow-sm scale-[1.02]'
                       : 'bg-sky-500/25 text-sky-300 border-sky-400 font-extrabold shadow-[0_0_15px_rgba(56,189,248,0.25)] scale-[1.02]'
                     : isLight
                       ? 'bg-white text-slate-800 border-slate-300 hover:text-slate-950 shadow-sm'
-                      : 'bg-slate-900/60 text-slate-400 border-slate-800 hover:text-slate-200'
+                      : 'bg-[#0e1424] hover:bg-[#161f36] text-slate-300 border-slate-800 hover:text-white shadow-sm shadow-black/40'
                 }`}
               >
                 {tab.label}
@@ -1435,10 +1448,10 @@ export function ObservatorySection() {
           {/* 3D Canvas Viewport (8 Columns) */}
           <div className="lg:col-span-8 relative">
             <div
-              className={`relative w-full h-[580px] sm:h-[690px] rounded-3xl border shadow-2xl overflow-hidden backdrop-blur-xl transition-all duration-300 ${
+              className={`relative w-full h-[580px] sm:h-[690px] rounded-3xl border shadow-2xl overflow-hidden transition-all duration-300 ${
                 isLight
-                  ? 'bg-white/90 border-slate-200/90 shadow-[0_25px_60px_-15px_rgba(15,23,42,0.1),0_0_0_1px_rgba(15,23,42,0.03)]'
-                  : 'bg-[#080d1a]/95 border-slate-800/90 shadow-black/80'
+                  ? 'backdrop-blur-xl bg-white/90 border-slate-200/90 shadow-[0_25px_60px_-15px_rgba(15,23,42,0.1),0_0_0_1px_rgba(15,23,42,0.03)]'
+                  : 'bg-[#080c16] border-slate-800 shadow-2xl shadow-black/90'
               }`}
             >
               {/* Tactical Viewport HUD Corner Brackets */}
@@ -1477,7 +1490,7 @@ export function ObservatorySection() {
                     type="button"
                     onClick={handleResetCamera}
                     title="Reset focus to view full architecture"
-                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-[11px] font-mono font-bold bg-sky-500/25 text-sky-300 border border-sky-400/60 hover:bg-sky-500/35 transition-all shadow-lg backdrop-blur-xl"
+                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-[11px] font-mono font-bold bg-[#0e1424] hover:bg-[#161f36] text-sky-400 border border-sky-500/50 hover:border-sky-400 transition-all shadow-xl shadow-black/60"
                   >
                     <RotateCcw className={`w-3.5 h-3.5 transition-transform duration-500 ${isResetting ? '-rotate-180 text-sky-400' : ''}`} />
                     <span>Focus: {currentNodes.find(n => n.id === focusedNodeId)?.name.split(':')[0] || 'Node'} (Click to Reset)</span>
@@ -1494,14 +1507,14 @@ export function ObservatorySection() {
                     }
                   }}
                   title={isAutoRotating ? 'Pause 360° Continuous Orbit' : 'Resume 360° Continuous Orbit'}
-                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-[11px] font-mono font-bold transition-all backdrop-blur-xl border shadow-lg ${
+                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-[11px] font-mono font-bold transition-all border shadow-lg ${
                     isAutoRotating && !focusedNodeId
                       ? isLight
                         ? 'bg-orange-500 text-white border-orange-400 shadow-orange-500/30 scale-[1.02]'
                         : 'bg-gradient-to-r from-orange-500 to-amber-500 text-slate-950 border-orange-400 font-extrabold shadow-[0_0_20px_rgba(249,115,22,0.4)] scale-[1.02]'
                       : isLight
-                        ? 'bg-white/95 text-slate-700 border-slate-300 hover:text-slate-950 hover:bg-slate-100'
-                        : 'bg-slate-950/85 text-slate-300 border-slate-800 hover:text-white hover:bg-slate-900'
+                        ? 'backdrop-blur-xl bg-white/95 text-slate-700 border-slate-300 hover:text-slate-950 hover:bg-slate-100'
+                        : 'bg-[#0e1424] hover:bg-[#161f36] text-slate-200 border-slate-800 hover:text-white shadow-xl shadow-black/60'
                   }`}
                 >
                   <Rotate3d className={`w-3.5 h-3.5 ${isAutoRotating && !focusedNodeId ? 'animate-spin' : ''}`} style={{ animationDuration: '6s' }} />
@@ -1509,8 +1522,8 @@ export function ObservatorySection() {
                 </button>
 
                 {/* Camera View Presets */}
-                <div className={`hidden sm:flex items-center gap-1 p-1 rounded-xl border backdrop-blur-xl text-[10px] font-mono font-bold ${
-                  isLight ? 'bg-white/90 border-slate-300 shadow-sm' : 'bg-slate-950/80 border-slate-800/90 shadow-xl'
+                <div className={`hidden sm:flex items-center gap-1 p-1 rounded-xl border text-[10px] font-mono font-bold ${
+                  isLight ? 'backdrop-blur-xl bg-white/90 border-slate-300 shadow-sm' : 'bg-[#0e1424] border-slate-800 shadow-xl shadow-black/60'
                 }`}>
                   <button
                     type="button"
@@ -1609,8 +1622,8 @@ export function ObservatorySection() {
               </Canvas>
 
               {/* Floating Bottom-Right Smooth Zoom & Refresh / Reset Controls */}
-              <div className={`absolute bottom-4 right-4 z-20 flex items-center gap-1.5 p-1 rounded-xl border backdrop-blur-xl shadow-xl ${
-                isLight ? 'bg-white/90 border-slate-300' : 'bg-slate-950/85 border-slate-800'
+              <div className={`absolute bottom-4 right-4 z-20 flex items-center gap-1.5 p-1 rounded-xl border shadow-xl ${
+                isLight ? 'backdrop-blur-xl bg-white/90 border-slate-300' : 'bg-[#0e1424] border-slate-800 shadow-2xl shadow-black/80'
               }`}>
                 <button
                   type="button"
@@ -1664,10 +1677,10 @@ export function ObservatorySection() {
           {/* Node Telemetry Inspector Panel (4 Columns) */}
           <div className="lg:col-span-4 space-y-6">
             <div
-              className={`rounded-3xl border p-7 backdrop-blur-xl shadow-2xl transition-all duration-300 ${
+              className={`rounded-3xl border p-7 shadow-2xl transition-all duration-300 ${
                 isLight
-                  ? 'bg-white/95 border-slate-200/90 shadow-[0_20px_50px_rgba(15,23,42,0.06),0_0_0_1px_rgba(15,23,42,0.03)]'
-                  : 'bg-slate-950/90 border-slate-800/90 shadow-black/80'
+                  ? 'backdrop-blur-xl bg-white/95 border-slate-200/90 shadow-[0_20px_50px_rgba(15,23,42,0.06),0_0_0_1px_rgba(15,23,42,0.03)]'
+                  : 'bg-[#0d121f] border-slate-800 shadow-2xl shadow-black/80'
               }`}
             >
               {/* Active Node Header with Minimal Round Icon */}
@@ -1737,7 +1750,7 @@ export function ObservatorySection() {
               {/* Metrics Grid */}
               <div className="grid grid-cols-2 gap-3 pt-2">
                 <div className={`p-3 rounded-xl border text-xs font-mono ${
-                  isLight ? 'bg-slate-50 border-slate-300' : 'bg-slate-900/50 border-slate-800'
+                  isLight ? 'bg-slate-50 border-slate-300' : 'bg-[#121829] border-slate-800'
                 }`}>
                   <div className={`text-[10px] mb-1 flex items-center gap-1 font-bold ${isLight ? 'text-slate-700' : 'text-slate-400'}`}>
                     <Zap className="w-3 h-3 text-sky-500" /> Throughput
@@ -1748,7 +1761,7 @@ export function ObservatorySection() {
                 </div>
 
                 <div className={`p-3 rounded-xl border text-xs font-mono ${
-                  isLight ? 'bg-slate-50 border-slate-300' : 'bg-slate-900/50 border-slate-800'
+                  isLight ? 'bg-slate-50 border-slate-300' : 'bg-[#121829] border-slate-800'
                 }`}>
                   <div className={`text-[10px] mb-1 flex items-center gap-1 font-bold ${isLight ? 'text-slate-700' : 'text-slate-400'}`}>
                     <Clock className="w-3 h-3 text-emerald-500" /> Latency
@@ -1761,7 +1774,7 @@ export function ObservatorySection() {
 
               {/* Health Indicator */}
               <div className={`mt-4 p-3 rounded-xl border flex items-center justify-between text-xs font-mono ${
-                isLight ? 'bg-emerald-50/90 border-emerald-300 text-emerald-900 font-semibold' : 'bg-emerald-950/40 border-emerald-800/40 text-emerald-300'
+                isLight ? 'bg-emerald-50/90 border-emerald-300 text-emerald-900 font-semibold' : 'bg-[#121829] border-slate-800 text-emerald-300'
               }`}>
                 <span className="flex items-center gap-1.5">
                   <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
@@ -1773,8 +1786,8 @@ export function ObservatorySection() {
 
             {/* Platform Telemetry Bar */}
             <div
-              className={`rounded-2xl border p-5 backdrop-blur-md text-xs font-mono space-y-2.5 ${
-                isLight ? 'bg-white/85 border-slate-200/90 text-slate-800' : 'bg-slate-950/70 border-slate-800 text-slate-400'
+              className={`rounded-2xl border p-5 text-xs font-mono space-y-2.5 ${
+                isLight ? 'backdrop-blur-md bg-white/85 border-slate-200/90 text-slate-800' : 'bg-[#0a0e18] border-slate-800 text-slate-300 shadow-xl shadow-black/60'
               }`}
             >
               <div className="flex items-center justify-between pb-2 border-b border-slate-200 dark:border-slate-800 font-semibold">

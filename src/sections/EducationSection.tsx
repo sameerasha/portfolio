@@ -39,10 +39,10 @@ export function EducationSection({ profile, onOpenConfigDrawer }: EducationSecti
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* Education Block */}
-          <div className={`animate-on-scroll rounded-3xl border p-7 sm:p-8 flex flex-col justify-between transition-all duration-300 backdrop-blur-md ${
+          <div className={`animate-on-scroll rounded-3xl border p-6 sm:p-8 flex flex-col justify-between transition-all duration-300 ${
             isLight
-              ? 'bg-white/95 border-slate-200/90 shadow-[0_20px_50px_rgba(15,23,42,0.06),0_0_0_1px_rgba(15,23,42,0.03)] hover:border-sky-400 hover:shadow-lg'
-              : 'bg-slate-950/60 border-slate-850'
+              ? 'backdrop-blur-md bg-white/95 border-slate-200/90 shadow-[0_20px_50px_rgba(15,23,42,0.06),0_0_0_1px_rgba(15,23,42,0.03)] hover:border-sky-400 hover:shadow-lg'
+              : 'bg-[#0d121f] border-slate-800 shadow-2xl shadow-black/70'
           }`}>
             <div>
               <div className="flex items-center gap-3 mb-4">
@@ -88,10 +88,10 @@ export function EducationSection({ profile, onOpenConfigDrawer }: EducationSecti
           </div>
 
           {/* Certifications Block */}
-          <div className={`animate-on-scroll rounded-3xl border p-7 sm:p-8 flex flex-col justify-between transition-all duration-300 backdrop-blur-md ${
+          <div className={`animate-on-scroll rounded-3xl border p-6 sm:p-8 flex flex-col justify-between transition-all duration-300 ${
             isLight
-              ? 'bg-white/95 border-slate-200/90 shadow-[0_20px_50px_rgba(15,23,42,0.06),0_0_0_1px_rgba(15,23,42,0.03)] hover:border-indigo-400 hover:shadow-lg'
-              : 'bg-slate-950/60 border-slate-850'
+              ? 'backdrop-blur-md bg-white/95 border-slate-200/90 shadow-[0_20px_50px_rgba(15,23,42,0.06),0_0_0_1px_rgba(15,23,42,0.03)] hover:border-indigo-400 hover:shadow-lg'
+              : 'bg-[#0d121f] border-slate-800 shadow-2xl shadow-black/70'
           }`}>
             <div>
               <div className="flex items-center gap-3 mb-4">

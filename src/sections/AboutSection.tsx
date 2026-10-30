@@ -37,7 +37,7 @@ export function AboutSection({ profile, onOpenConfigDrawer }: AboutSectionProps)
             className={`mt-4 md:mt-0 inline-flex items-center gap-1.5 self-start text-xs font-mono px-3 py-1.5 rounded-lg border transition-colors ${
               isLight
                 ? 'text-slate-800 hover:text-slate-950 bg-white hover:bg-slate-100 border-slate-300 font-semibold shadow-sm'
-                : 'text-slate-400 hover:text-sky-300 bg-slate-900/60 hover:bg-slate-800 border-slate-800'
+                : 'text-slate-300 hover:text-sky-300 bg-[#0e1424] hover:bg-[#161f36] border-slate-800 shadow-sm shadow-black/40'
             }`}
           >
             <FileEdit className="w-3.5 h-3.5 text-sky-500" />
@@ -46,10 +46,10 @@ export function AboutSection({ profile, onOpenConfigDrawer }: AboutSectionProps)
         </div>
 
         {/* Narrative Box */}
-        <div className={`animate-on-scroll rounded-3xl border p-8 sm:p-10 mb-12 backdrop-blur-md relative overflow-hidden transition-all duration-300 ${
+        <div className={`animate-on-scroll rounded-3xl border p-6 sm:p-10 mb-8 sm:mb-12 relative overflow-hidden transition-all duration-300 ${
           isLight
-            ? 'bg-white/95 border-slate-200/90 shadow-[0_20px_50px_rgba(15,23,42,0.06),0_0_0_1px_rgba(15,23,42,0.03)]'
-            : 'bg-slate-900/40 border-slate-800/80 shadow-xl'
+            ? 'backdrop-blur-md bg-white/95 border-slate-200/90 shadow-[0_20px_50px_rgba(15,23,42,0.06),0_0_0_1px_rgba(15,23,42,0.03)]'
+            : 'bg-[#0d121f] border-slate-800 shadow-2xl shadow-black/70'
         }`}>
           <div className={`absolute top-0 right-0 w-80 h-80 rounded-full blur-3xl pointer-events-none ${
             isLight ? 'bg-sky-200/20' : 'bg-sky-500/5'
@@ -84,17 +84,17 @@ export function AboutSection({ profile, onOpenConfigDrawer }: AboutSectionProps)
           {profile.aboutDraft.focusAreas.map((area) => (
             <div
               key={area.title}
-              className={`animate-on-scroll rounded-2xl border p-7 transition-all duration-300 group backdrop-blur-md ${
+              className={`animate-on-scroll rounded-2xl border p-5 sm:p-7 transition-all duration-300 group ${
                 isLight
-                  ? 'bg-white/95 border-slate-200/90 hover:border-sky-500 hover:shadow-[0_20px_40px_-10px_rgba(14,165,233,0.12)]'
-                  : 'bg-slate-950/60 border-slate-850 hover:border-slate-700/80 shadow-md'
+                  ? 'backdrop-blur-md bg-white/95 border-slate-200/90 hover:border-sky-500 hover:shadow-[0_20px_40px_-10px_rgba(14,165,233,0.12)]'
+                  : 'bg-[#0e1422] border-slate-800 hover:border-slate-700 shadow-xl shadow-black/50'
               }`}
             >
               <div className="flex items-center gap-3.5 mb-3.5">
                 <div className={`p-2.5 rounded-xl border transition-colors ${
                   isLight
                     ? 'bg-sky-50 border-sky-200/80 text-sky-700 group-hover:bg-sky-100'
-                    : 'bg-slate-900 border-slate-800 group-hover:border-sky-500/40'
+                    : 'bg-[#141b2d] border-slate-800 group-hover:border-sky-500/40'
                 }`}>
                   {iconMap[area.title] || <Server className="w-5 h-5 text-sky-500" />}
                 </div>

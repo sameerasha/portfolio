@@ -23,7 +23,7 @@ export function BackToTop({ show }: BackToTopProps) {
       className={`fixed bottom-6 right-6 z-40 p-3 rounded-full border shadow-xl transition-all duration-300 hover:scale-110 active:scale-95 animate-in fade-in slide-in-from-bottom-4 ${
         isLight
           ? 'bg-white hover:bg-slate-50 text-slate-800 border-slate-200 shadow-slate-200/80 hover:border-sky-400'
-          : 'bg-slate-900/90 hover:bg-slate-800 text-sky-400 border-slate-700/80 shadow-black/50 hover:border-sky-400 hover:shadow-[0_0_15px_rgba(56,189,248,0.3)]'
+          : 'bg-[#0d121f] hover:bg-[#161f36] text-sky-400 border-slate-700 shadow-2xl shadow-black/80 hover:border-sky-400 hover:shadow-[0_0_20px_rgba(56,189,248,0.35)]'
       }`}
     >
       <ArrowUp className="w-5 h-5" />

@@ -36,10 +36,10 @@ export function HeroSection({ profile }: HeroSectionProps) {
           <div className="lg:col-span-7 flex flex-col justify-center space-y-6">
             {/* Unified Architectural Status Command Bar */}
             <div className="inline-flex flex-wrap items-center gap-2.5">
-              <div className={`inline-flex items-center gap-2 border px-4 py-2 rounded-full backdrop-blur-md shadow-sm transition-all ${
+              <div className={`inline-flex flex-wrap items-center gap-x-2 gap-y-1.5 border px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-2xl sm:rounded-full shadow-sm transition-all ${
                 isLight
-                  ? 'bg-white/95 border-slate-300 text-slate-900 shadow-slate-200/50'
-                  : 'bg-slate-900/90 border-slate-800/90 text-slate-200 shadow-black/40'
+                  ? 'backdrop-blur-md bg-white/95 border-slate-300 text-slate-900 shadow-slate-200/50'
+                  : 'bg-[#0d121f] border-slate-800 text-slate-200 shadow-md shadow-black/50'
               }`}>
                 <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse shadow-[0_0_10px_rgba(16,185,129,0.8)]" />
                 <span className="text-xs font-mono font-bold tracking-tight">
@@ -73,7 +73,7 @@ export function HeroSection({ profile }: HeroSectionProps) {
             <SplitHeadline
               text="Engineering Scalable Systems."
               highlightText="Building Event-Driven Microservices."
-              className={`text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-[1.12] transition-colors ${
+              className={`text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.14] transition-colors ${
                 isLight ? 'text-slate-950' : 'text-white'
               }`}
               highlightClassName="text-transparent bg-clip-text bg-gradient-to-r from-sky-600 via-indigo-600 to-sky-500"
@@ -88,10 +88,10 @@ export function HeroSection({ profile }: HeroSectionProps) {
             </p>
 
             {/* Call To Actions */}
-            <div className="flex flex-wrap items-center gap-3.5 pt-2">
+            <div className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3 pt-2">
               <a
                 href="#projects"
-                className="group flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-bold bg-sky-500 hover:bg-sky-400 text-slate-950 transition-all shadow-[0_0_20px_rgba(56,189,248,0.25)] hover:shadow-[0_0_30px_rgba(56,189,248,0.4)]"
+                className="group flex items-center justify-center gap-2 px-6 py-3 rounded-xl text-sm font-bold bg-sky-500 hover:bg-sky-400 text-slate-950 transition-all shadow-[0_0_20px_rgba(56,189,248,0.25)] hover:shadow-[0_0_30px_rgba(56,189,248,0.4)]"
               >
                 <span>Explore Projects</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -101,7 +101,7 @@ export function HeroSection({ profile }: HeroSectionProps) {
                 <a
                   href={profile.resume.url}
                   download={profile.resume.fileName}
-                  className="flex items-center gap-2 px-5 py-3 rounded-xl text-sm font-bold bg-indigo-600 hover:bg-indigo-500 text-white transition-all shadow-[0_0_20px_rgba(99,102,241,0.25)] hover:shadow-[0_0_30px_rgba(99,102,241,0.4)]"
+                  className="flex items-center justify-center gap-2 px-5 py-3 rounded-xl text-sm font-bold bg-indigo-600 hover:bg-indigo-500 text-white transition-all shadow-[0_0_20px_rgba(99,102,241,0.25)] hover:shadow-[0_0_30px_rgba(99,102,241,0.4)]"
                 >
                   <FileText className="w-4 h-4" />
                   <span>Download Resume (PDF)</span>
@@ -110,10 +110,10 @@ export function HeroSection({ profile }: HeroSectionProps) {
 
               <a
                 href="#contact"
-                className={`flex items-center gap-2 px-5 py-3 rounded-xl text-sm font-bold border transition-all backdrop-blur-md ${
+                className={`flex items-center justify-center gap-2 px-5 py-3 rounded-xl text-sm font-bold border transition-all ${
                   isLight
-                    ? 'text-slate-900 hover:text-slate-950 bg-white hover:bg-slate-50 border-slate-300 shadow-sm'
-                    : 'text-slate-200 hover:text-white bg-slate-900/80 hover:bg-slate-850 border-slate-750'
+                    ? 'backdrop-blur-md text-slate-900 hover:text-slate-950 bg-white hover:bg-slate-50 border-slate-300 shadow-sm'
+                    : 'bg-[#0e1424] hover:bg-[#161f36] border-slate-800 text-slate-200 hover:text-white shadow-md shadow-black/50'
                 }`}
               >
                 <Mail className="w-4 h-4 text-sky-500" />
@@ -210,10 +210,10 @@ export function HeroSection({ profile }: HeroSectionProps) {
             </div>
 
             {/* Top Telemetry Chip */}
-            <div className={`z-20 mb-2 inline-flex items-center gap-2 border px-3.5 py-1 rounded-full text-[11px] font-mono backdrop-blur-xl transition-all shadow-lg ${
+            <div className={`z-20 mb-2 inline-flex items-center gap-2 border px-3.5 py-1 rounded-full text-[11px] font-mono transition-all shadow-lg ${
               isLight
-                ? 'bg-white/95 border-slate-200 text-slate-800 shadow-slate-200/50'
-                : 'bg-slate-950/85 border-slate-800 text-sky-400 shadow-[0_0_20px_rgba(56,189,248,0.2)]'
+                ? 'backdrop-blur-xl bg-white/95 border-slate-200 text-slate-800 shadow-slate-200/50'
+                : 'bg-[#0d121f] border-slate-800 text-sky-400 shadow-lg shadow-black/60'
             }`}>
               <span className="w-1.5 h-1.5 rounded-full bg-orange-400 animate-ping" />
               <span>AWS 3-TIER ARCHITECTURE // CLOUD & EVENT-DRIVEN CORE</span>
@@ -238,7 +238,7 @@ export function HeroSection({ profile }: HeroSectionProps) {
               className={`mt-2 inline-flex items-center gap-2 text-xs font-mono py-1.5 px-4 rounded-full border transition-all ${
                 isLight
                   ? 'bg-white/90 border-slate-200 text-sky-700 hover:border-sky-400 shadow-sm'
-                  : 'bg-slate-900/80 border-slate-800 text-sky-400 hover:border-sky-500/60 hover:text-sky-300'
+                  : 'bg-[#0d121f] border-slate-800 text-sky-400 hover:border-sky-500/60 hover:text-sky-300 shadow-md shadow-black/50'
               }`}
             >
               <span>Explore Live 3D Microservice Topology</span>

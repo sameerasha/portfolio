@@ -48,10 +48,10 @@ export function ProjectDetailModal({ project, isOpen, onClose }: ProjectDetailMo
       maxWidth="max-w-5xl"
     >
       {/* Top Architectural Telemetry Strip */}
-      <div className={`p-4 rounded-2xl border transition-colors flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs font-mono backdrop-blur-md ${
+      <div className={`p-4 rounded-2xl border transition-colors flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs font-mono ${
         isLight
-          ? 'bg-slate-50/90 border-slate-200 text-slate-800 shadow-sm'
-          : 'bg-[#0d1322]/90 border-slate-800 text-slate-200 shadow-inner'
+          ? 'backdrop-blur-md bg-slate-50/90 border-slate-200 text-slate-800 shadow-sm'
+          : 'bg-[#0d121f] border-slate-800 text-slate-200 shadow-xl shadow-black/50'
       }`}>
         <div className="flex flex-wrap items-center gap-3">
           <div className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full font-bold border ${
@@ -105,7 +105,7 @@ export function ProjectDetailModal({ project, isOpen, onClose }: ProjectDetailMo
                     : 'bg-sky-500 text-slate-950 shadow-[0_0_20px_rgba(56,189,248,0.35)]'
                   : isLight
                     ? 'text-slate-600 hover:text-slate-950 hover:bg-slate-100'
-                    : 'text-slate-400 hover:text-slate-200 hover:bg-slate-850'
+                    : 'text-slate-300 hover:text-white hover:bg-[#161f36]'
               }`}
             >
               <Icon className="w-3.5 h-3.5" />
@@ -120,7 +120,7 @@ export function ProjectDetailModal({ project, isOpen, onClose }: ProjectDetailMo
         <div className="space-y-6 animate-in fade-in duration-200">
           {/* Executive Summary */}
           <div className={`p-5 rounded-2xl border ${
-            isLight ? 'bg-slate-50/80 border-slate-200' : 'bg-slate-950/60 border-slate-850'
+            isLight ? 'bg-slate-50/80 border-slate-200' : 'bg-[#0e1422] border-slate-800 shadow-md'
           }`}>
             <h4 className={`text-xs font-mono uppercase tracking-wider font-bold mb-2 flex items-center gap-1.5 ${
               isLight ? 'text-sky-700' : 'text-sky-400'
@@ -140,7 +140,7 @@ export function ProjectDetailModal({ project, isOpen, onClose }: ProjectDetailMo
             <div className={`p-4 rounded-2xl border transition-colors ${
               isLight
                 ? 'bg-rose-50/50 border-rose-200 text-slate-800'
-                : 'bg-rose-950/20 border-rose-900/50 text-slate-200'
+                : 'bg-[#180f15] border-rose-900/60 text-slate-200'
             }`}>
               <div className="flex items-center gap-2 text-rose-500 font-mono text-xs font-bold uppercase tracking-wider mb-2">
                 <AlertTriangle className="w-3.5 h-3.5" />
@@ -154,7 +154,7 @@ export function ProjectDetailModal({ project, isOpen, onClose }: ProjectDetailMo
             <div className={`p-4 rounded-2xl border transition-colors ${
               isLight
                 ? 'bg-emerald-50/50 border-emerald-200 text-slate-800'
-                : 'bg-emerald-950/20 border-emerald-900/50 text-slate-200'
+                : 'bg-[#0c1a17] border-emerald-900/60 text-slate-200'
             }`}>
               <div className="flex items-center gap-2 text-emerald-500 font-mono text-xs font-bold uppercase tracking-wider mb-2">
                 <CheckCircle2 className="w-3.5 h-3.5" />
@@ -181,7 +181,7 @@ export function ProjectDetailModal({ project, isOpen, onClose }: ProjectDetailMo
                   className={`flex items-start gap-2.5 p-3 rounded-xl border text-xs leading-relaxed transition-colors ${
                     isLight
                       ? 'bg-white border-slate-200 text-slate-800 shadow-sm'
-                      : 'bg-slate-900/80 border-slate-800 text-slate-200'
+                      : 'bg-[#0e1422] border-slate-800 text-slate-200 shadow-sm'
                   }`}
                 >
                   <span className="w-2 h-2 rounded-full bg-sky-400 mt-1 shrink-0 shadow-[0_0_8px_rgba(56,189,248,0.8)]" />
@@ -193,7 +193,7 @@ export function ProjectDetailModal({ project, isOpen, onClose }: ProjectDetailMo
 
           {/* Complete Technology Ecosystem */}
           <div className={`p-5 rounded-2xl border space-y-3 ${
-            isLight ? 'bg-slate-50/80 border-slate-200' : 'bg-slate-950/60 border-slate-850'
+            isLight ? 'bg-slate-50/80 border-slate-200' : 'bg-[#0e1422] border-slate-800 shadow-md'
           }`}>
             <h4 className={`text-xs font-mono uppercase tracking-wider font-bold flex items-center gap-1.5 ${
               isLight ? 'text-sky-700' : 'text-sky-400'
@@ -254,7 +254,7 @@ export function ProjectDetailModal({ project, isOpen, onClose }: ProjectDetailMo
               System Topology Overview
             </h4>
             <p className={`text-sm leading-relaxed p-4 rounded-xl border ${
-              isLight ? 'bg-slate-50 border-slate-200 text-slate-800' : 'bg-slate-950/70 border-slate-850 text-slate-200'
+              isLight ? 'bg-slate-50 border-slate-200 text-slate-800' : 'bg-[#0e1422] border-slate-800 text-slate-200 shadow-sm'
             }`}>
               {project.architectureOverview}
             </p>
@@ -273,7 +273,7 @@ export function ProjectDetailModal({ project, isOpen, onClose }: ProjectDetailMo
                   className={`p-4 rounded-xl border flex flex-col sm:flex-row sm:items-center justify-between gap-3 transition-colors ${
                     isLight
                       ? 'bg-white border-slate-200 shadow-sm hover:border-sky-400'
-                      : 'bg-slate-900/80 border-slate-800 hover:border-slate-700'
+                      : 'bg-[#0e1422] border-slate-800 hover:border-slate-700 shadow-sm'
                   }`}
                 >
                   <div className="space-y-1">
@@ -328,7 +328,7 @@ export function ProjectDetailModal({ project, isOpen, onClose }: ProjectDetailMo
                   className={`p-3.5 rounded-xl border leading-relaxed text-xs flex items-start gap-3 ${
                     isLight
                       ? 'bg-white border-slate-200 text-slate-800 shadow-sm'
-                      : 'bg-slate-950/60 border-slate-800 text-slate-200'
+                      : 'bg-[#0e1422] border-slate-800 text-slate-200 shadow-sm'
                   }`}
                 >
                   <span className="w-1.5 h-1.5 rounded-full bg-indigo-400 mt-1.5 shrink-0 shadow-[0_0_6px_rgba(99,102,241,0.8)]" />
@@ -351,7 +351,7 @@ export function ProjectDetailModal({ project, isOpen, onClose }: ProjectDetailMo
                   className={`p-3.5 rounded-xl border leading-relaxed text-xs flex items-start gap-3 ${
                     isLight
                       ? 'bg-white border-slate-200 text-slate-800 shadow-sm'
-                      : 'bg-slate-950/60 border-slate-800 text-slate-200'
+                      : 'bg-[#0e1422] border-slate-800 text-slate-200 shadow-sm'
                   }`}
                 >
                   <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />

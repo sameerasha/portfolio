@@ -46,12 +46,10 @@ export function ExperienceSection({ profile, onOpenConfigDrawer }: ExperienceSec
             return (
               <div
                 key={index}
-                className={`animate-on-scroll relative rounded-3xl p-8 sm:p-9 border transition-all duration-300 backdrop-blur-md ${
+                className={`animate-on-scroll relative rounded-3xl p-6 sm:p-8 lg:p-9 border transition-all duration-300 ${
                   isLight
-                    ? 'bg-white/95 border-slate-200/90 shadow-[0_20px_50px_rgba(15,23,42,0.06),0_0_0_1px_rgba(15,23,42,0.03)] hover:border-sky-400 hover:shadow-[0_25px_60px_rgba(2,132,199,0.1)]'
-                    : isPlaceholder
-                      ? 'bg-slate-900/40 border-slate-800/80 hover:border-slate-700/80'
-                      : 'bg-slate-900/80 border-slate-800'
+                    ? 'backdrop-blur-md bg-white/95 border-slate-200/90 shadow-[0_20px_50px_rgba(15,23,42,0.06),0_0_0_1px_rgba(15,23,42,0.03)] hover:border-sky-400 hover:shadow-[0_25px_60px_rgba(2,132,199,0.1)]'
+                    : 'bg-[#0d121f] border-slate-800 shadow-2xl shadow-black/70 hover:border-slate-700'
                 }`}
               >
                 {/* Onboarding Notice for Placeholder */}

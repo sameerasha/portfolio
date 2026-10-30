@@ -58,10 +58,10 @@ export function SkillsSection({ profile }: SkillsSectionProps) {
         />
 
         {/* Legend / Integrity Banner */}
-        <div className={`animate-on-scroll mb-5 p-4 rounded-2xl border flex flex-wrap items-center justify-between gap-4 text-xs font-mono backdrop-blur-md transition-colors ${
+        <div className={`animate-on-scroll mb-5 p-4 rounded-2xl border flex flex-wrap items-center justify-between gap-4 text-xs font-mono transition-colors ${
           isLight
-            ? 'bg-white/95 border-slate-200/90 text-slate-800 shadow-[0_10px_30px_rgba(15,23,42,0.04)] font-medium'
-            : 'bg-slate-900/60 border-slate-800/80 text-slate-300'
+            ? 'backdrop-blur-md bg-white/95 border-slate-200/90 text-slate-800 shadow-[0_10px_30px_rgba(15,23,42,0.04)] font-medium'
+            : 'bg-[#0d121f] border-slate-800 text-slate-200 shadow-xl shadow-black/50'
         }`}>
           <div className="flex flex-wrap items-center gap-6">
             <div className="flex items-center gap-2">
@@ -100,7 +100,7 @@ export function SkillsSection({ profile }: SkillsSectionProps) {
                   : 'bg-sky-500/20 text-sky-300 border-sky-500/50'
                 : isLight
                   ? 'bg-slate-50 text-slate-800 border-slate-300 hover:text-slate-950'
-                  : 'bg-slate-800/40 text-slate-400 border-slate-700 hover:text-slate-200'
+                  : 'bg-[#0e1424] hover:bg-[#161f36] text-slate-300 border-slate-700 hover:text-white shadow-sm shadow-black/40'
             }`}
           >
             <SlidersHorizontal className="w-3.5 h-3.5" />
@@ -120,7 +120,7 @@ export function SkillsSection({ profile }: SkillsSectionProps) {
                   : 'bg-sky-500 text-slate-950 shadow-[0_0_15px_rgba(56,189,248,0.3)]'
                 : isLight
                   ? 'bg-white/95 text-slate-800 border border-slate-300 hover:border-slate-400 shadow-sm'
-                  : 'bg-slate-900/60 text-slate-400 hover:text-white border border-slate-800'
+                  : 'bg-[#0e1424] hover:bg-[#161f36] text-slate-300 hover:text-white border border-slate-800 shadow-md shadow-black/40'
             }`}
           >
             All Categories ({profile.skills.length})
@@ -144,7 +144,7 @@ export function SkillsSection({ profile }: SkillsSectionProps) {
                       : 'bg-sky-500 text-slate-950 shadow-[0_0_15px_rgba(56,189,248,0.3)]'
                     : isLight
                       ? 'bg-white/95 text-slate-800 border border-slate-300 hover:border-slate-400 shadow-sm'
-                      : 'bg-slate-900/60 text-slate-400 hover:text-white border border-slate-800 hover:border-slate-700'
+                      : 'bg-[#0e1424] hover:bg-[#161f36] text-slate-300 hover:text-white border border-slate-800 hover:border-slate-700 shadow-md shadow-black/40'
                 }`}
               >
                 <Icon className="w-3.5 h-3.5" />
@@ -168,14 +168,14 @@ export function SkillsSection({ profile }: SkillsSectionProps) {
             return (
               <div
                 key={skill.name}
-                className={`animate-on-scroll group p-6 rounded-2xl border transition-all duration-300 flex flex-col justify-between backdrop-blur-md ${
+                className={`animate-on-scroll group p-6 rounded-2xl border transition-all duration-300 flex flex-col justify-between ${
                   isLight
                     ? skill.isConfirmed
-                      ? 'bg-white/95 border-sky-300/80 shadow-[0_4px_20px_rgba(2,132,199,0.06)] hover:border-sky-500 hover:shadow-[0_15px_30px_rgba(2,132,199,0.12)] hover:-translate-y-1'
-                      : 'bg-white/90 border-slate-200/90 shadow-[0_4px_16px_rgba(15,23,42,0.03)] hover:border-slate-300 hover:shadow-md hover:-translate-y-1'
+                      ? 'backdrop-blur-md bg-white/95 border-sky-300/80 shadow-[0_4px_20px_rgba(2,132,199,0.06)] hover:border-sky-500 hover:shadow-[0_15px_30px_rgba(2,132,199,0.12)] hover:-translate-y-1'
+                      : 'backdrop-blur-md bg-white/90 border-slate-200/90 shadow-[0_4px_16px_rgba(15,23,42,0.03)] hover:border-slate-300 hover:shadow-md hover:-translate-y-1'
                     : skill.isConfirmed
-                      ? 'bg-slate-900/70 border-sky-500/30 hover:border-sky-400/60 hover:shadow-[0_0_20px_rgba(56,189,248,0.12)] hover:-translate-y-1'
-                      : 'bg-slate-950/40 border-slate-800/80 hover:border-slate-700'
+                      ? 'bg-[#0d121f] border-sky-500/40 hover:border-sky-400 hover:shadow-[0_0_20px_rgba(56,189,248,0.15)] hover:-translate-y-1 shadow-lg shadow-black/50'
+                      : 'bg-[#0e1422] border-slate-800 hover:border-slate-700 hover:-translate-y-1 shadow-lg shadow-black/50'
                 }`}
               >
                 <div>

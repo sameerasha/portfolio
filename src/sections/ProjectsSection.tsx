@@ -1,10 +1,13 @@
-import { useState } from 'react';
+import { useState, lazy, Suspense } from 'react';
 import { ArrowUpRight, Box, Cpu, Terminal, Users, Clock, ShieldCheck } from 'lucide-react';
 import type { ProfileData, ProjectCaseStudy } from '../types/portfolio';
 import { SectionHeading } from '../components/common/SectionHeading';
 import { Badge } from '../components/common/Badge';
-import { ProjectDetailModal } from '../components/modals/ProjectDetailModal';
 import { useTheme } from '../context/ThemeContext';
+
+const ProjectDetailModal = lazy(() =>
+  import('../components/modals/ProjectDetailModal').then((m) => ({ default: m.ProjectDetailModal }))
+);
 
 interface ProjectsSectionProps {
   profile: ProfileData;
@@ -37,7 +40,7 @@ export function ProjectsSection({ profile }: ProjectsSectionProps) {
               <article
                 key={project.id}
                 data-stack-card
-                className={`group relative rounded-3xl border transition-all duration-300 p-6 sm:p-7 lg:p-8 shadow-2xl ${
+                className={`group relative rounded-3xl border transition-all duration-300 p-5 sm:p-7 lg:p-8 shadow-2xl ${
                   isLight
                     ? 'bg-white border-slate-200 shadow-xl hover:border-sky-400'
                     : 'bg-[#0b0f19] border-slate-800 shadow-black/90 hover:border-sky-500/50'
@@ -108,8 +111,8 @@ export function ProjectsSection({ profile }: ProjectsSectionProps) {
                     {/* Key Architectural Features */}
                     <div className={`p-3.5 rounded-xl border space-y-1.5 text-xs font-mono ${
                       isLight
-                        ? 'bg-slate-50/90 border-slate-200 text-slate-900 font-medium'
-                        : 'bg-slate-900/90 border-slate-750 text-slate-100 shadow-md'
+                        ? 'bg-slate-50 border-slate-200 text-slate-900 font-medium'
+                        : 'bg-[#121829] border-slate-800 text-slate-100 shadow-md'
                     }`}>
                       <div className={`text-[11px] font-bold uppercase tracking-wider flex items-center gap-1.5 ${
                         isLight ? 'text-sky-700' : 'text-sky-400'
@@ -177,7 +180,7 @@ export function ProjectsSection({ profile }: ProjectsSectionProps) {
                   <div className="lg:col-span-5 flex flex-col justify-between space-y-3.5">
                     {/* Metadata Card */}
                     <div className={`p-4 rounded-2xl border ${
-                      isLight ? 'bg-slate-50 border-slate-200' : 'bg-slate-900/70 border-slate-800'
+                      isLight ? 'bg-slate-50 border-slate-200' : 'bg-[#121829] border-slate-800'
                     }`}>
                       <div className="flex flex-wrap items-center justify-between gap-2 text-xs font-mono mb-3 text-slate-400">
                         <span className="flex items-center gap-1.5">
@@ -201,7 +204,7 @@ export function ProjectsSection({ profile }: ProjectsSectionProps) {
                             className={`p-2 rounded-xl border flex items-center justify-between text-xs font-mono transition-colors ${
                               isLight
                                 ? 'bg-white border-slate-200 text-slate-700'
-                                : 'bg-slate-950/80 border-slate-800/80 text-slate-300'
+                                : 'bg-[#090d18] border-slate-800 text-slate-300'
                             }`}
                           >
                             <span className="font-semibold truncate max-w-[170px]">{comp.name}</span>
@@ -217,7 +220,7 @@ export function ProjectsSection({ profile }: ProjectsSectionProps) {
 
                     {/* Terminal Code Snippet Preview */}
                     <div className={`p-3.5 rounded-2xl border font-mono text-[11px] space-y-1.5 ${
-                      isLight ? 'bg-slate-900 text-slate-200 border-slate-700' : 'bg-black/80 text-slate-300 border-slate-800'
+                      isLight ? 'bg-slate-900 text-slate-200 border-slate-700' : 'bg-[#060913] text-slate-300 border-slate-800'
                     }`}>
                       <div className="flex items-center justify-between text-[10px] text-slate-400 pb-2 border-b border-slate-800">
                         <span className="flex items-center gap-1.5">
@@ -326,12 +329,16 @@ export function ProjectsSection({ profile }: ProjectsSectionProps) {
         </div>
       </div>
 
-      {/* Case Study Detail Modal */}
-      <ProjectDetailModal
-        project={selectedProject}
-        isOpen={Boolean(selectedProject)}
-        onClose={() => setSelectedProject(null)}
-      />
+      {/* Case Study Detail Modal (Code-Split / Lazy-Loaded on demand) */}
+      {selectedProject && (
+        <Suspense fallback={null}>
+          <ProjectDetailModal
+            project={selectedProject}
+            isOpen={Boolean(selectedProject)}
+            onClose={() => setSelectedProject(null)}
+          />
+        </Suspense>
+      )}
     </section>
   );
 }

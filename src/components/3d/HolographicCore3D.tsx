@@ -289,7 +289,7 @@ export function HolographicCore3D({ reducedMotion = false }: HolographicCore3DPr
       // ---------------------------------------------------------------------
       // Track 1: Modern Web & Reactive Frontend (0° - Horizontal Cyan Track)
       // ---------------------------------------------------------------------
-      { id: 'react', name: 'React 19', trackIndex: 0, offset: 0 * step, color: '#00d8fe', icon: ReactLogo },
+      { id: 'react', name: 'React 19', trackIndex: 0, offset: 0, color: '#00d8fe', icon: ReactLogo },
       { id: 'typescript', name: 'TypeScript', trackIndex: 0, offset: 1 * step, color: '#3178c6', icon: TypeScriptLogo },
       { id: 'javascript', name: 'JavaScript (ES6+)', trackIndex: 0, offset: 2 * step, color: '#f7df1e', icon: JavaScriptLogo },
       { id: 'tailwind', name: 'Tailwind CSS', trackIndex: 0, offset: 3 * step, color: '#38bdf8', icon: TailwindLogo },
@@ -299,7 +299,7 @@ export function HolographicCore3D({ reducedMotion = false }: HolographicCore3DPr
       // ---------------------------------------------------------------------
       // Track 2: Enterprise Backend, Java & Microservices (60° Violet Track)
       // ---------------------------------------------------------------------
-      { id: 'java', name: 'Java 21', trackIndex: 1, offset: 0 * step + 0.22, color: '#f89820', icon: JavaLogo },
+      { id: 'java', name: 'Java 21', trackIndex: 1, offset: 0.22, color: '#f89820', icon: JavaLogo },
       { id: 'springboot', name: 'Spring Boot 3', trackIndex: 1, offset: 1 * step + 0.22, color: '#6db33f', icon: SpringBootLogo },
       { id: 'springsecurity', name: 'Spring Security', trackIndex: 1, offset: 2 * step + 0.22, color: '#10b981', icon: SpringSecurityLogo },
       { id: 'hibernate', name: 'Hibernate & JPA', trackIndex: 1, offset: 3 * step + 0.22, color: '#f6bb42', icon: HibernateLogo },
@@ -309,7 +309,7 @@ export function HolographicCore3D({ reducedMotion = false }: HolographicCore3DPr
       // ---------------------------------------------------------------------
       // Track 3: Cloud, Event Streaming, DevOps & Data (120° Amber Track)
       // ---------------------------------------------------------------------
-      { id: 'aws', name: 'AWS Cloud', trackIndex: 2, offset: 0 * step + 0.44, color: '#ff9900', icon: AwsLogo },
+      { id: 'aws', name: 'AWS Cloud', trackIndex: 2, offset: 0.44, color: '#ff9900', icon: AwsLogo },
       { id: 'kafka', name: 'Apache Kafka', trackIndex: 2, offset: 1 * step + 0.44, color: '#f43f5e', icon: KafkaLogo },
       { id: 'docker', name: 'Docker', trackIndex: 2, offset: 2 * step + 0.44, color: '#0db7ed', icon: DockerLogo },
       { id: 'postgres', name: 'PostgreSQL', trackIndex: 2, offset: 3 * step + 0.44, color: '#336791', icon: PostgresLogo },

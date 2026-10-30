@@ -60,12 +60,31 @@ function interpolateKeyframes(p: number): { pos: [number, number, number]; lookA
   };
 }
 
+// Deterministic particle coordinates across vertical depths (stable across re-renders/theme switches)
+function generateFieldPositions(count: number): Float32Array {
+  const pos = new Float32Array(count * 3);
+  for (let i = 0; i < count; i++) {
+    const rx = Math.sin(i * 12.9898) * 43758.5453;
+    const ry = Math.sin(i * 78.233) * 43758.5453;
+    const rz = Math.sin(i * 45.164) * 43758.5453;
+    const randX = rx - Math.floor(rx);
+    const randY = ry - Math.floor(ry);
+    const randZ = rz - Math.floor(rz);
+
+    pos[i * 3] = (randX - 0.5) * 14;
+    pos[i * 3 + 1] = randY * 12 - 9.5;
+    pos[i * 3 + 2] = (randZ - 0.5) * 8 - 1;
+  }
+  return pos;
+}
+
 // Particle field spanning all vertical depths of the portfolio
 function DeepParticleField({ count = 180, isLight = false }: { count?: number; isLight?: boolean }) {
   const pointsRef = useRef<THREE.Points>(null);
 
-  const [positions, colors] = useMemo(() => {
-    const pos = new Float32Array(count * 3);
+  const positions = useMemo(() => generateFieldPositions(count), [count]);
+
+  const colors = useMemo(() => {
     const col = new Float32Array(count * 3);
     const darkPalette = [
       new THREE.Color('#38bdf8'), // sky cyan
@@ -82,17 +101,12 @@ function DeepParticleField({ count = 180, isLight = false }: { count?: number; i
     const palette = isLight ? lightPalette : darkPalette;
 
     for (let i = 0; i < count; i++) {
-      // Spread across full scroll range y: +2 to -9
-      pos[i * 3] = (Math.random() - 0.5) * 14;
-      pos[i * 3 + 1] = Math.random() * 12 - 9.5;
-      pos[i * 3 + 2] = (Math.random() - 0.5) * 8 - 1;
-
       const c = palette[i % palette.length];
       col[i * 3] = c.r;
       col[i * 3 + 1] = c.g;
       col[i * 3 + 2] = c.b;
     }
-    return [pos, col];
+    return col;
   }, [count, isLight]);
 
   useFrame((state, delta) => {

@@ -37,12 +37,12 @@ export function Navbar({ profile, onOpenConfigDrawer }: NavbarProps) {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 px-4 sm:px-6 lg:px-8 ${
-        isScrolled ? 'pt-3 pb-2' : 'pt-5 pb-3'
+      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 px-3 sm:px-6 lg:px-8 ${
+        isScrolled ? 'pt-2.5 pb-2 sm:pt-3' : 'pt-3.5 pb-2.5 sm:pt-5 sm:pb-3'
       }`}
     >
       <div
-        className={`max-w-7xl mx-auto rounded-2xl sm:rounded-full transition-all duration-300 px-5 sm:px-7 py-3 ${
+        className={`max-w-7xl mx-auto rounded-2xl sm:rounded-full transition-all duration-300 px-4 sm:px-6 lg:px-7 py-2.5 sm:py-3 ${
           isScrolled
             ? isLight
               ? 'bg-white/90 backdrop-blur-2xl border border-slate-200/90 shadow-[0_15px_45px_rgba(15,23,42,0.08),0_0_0_1px_rgba(15,23,42,0.02)]'
@@ -52,41 +52,46 @@ export function Navbar({ profile, onOpenConfigDrawer }: NavbarProps) {
               : 'bg-slate-950/40 backdrop-blur-md border border-slate-800/50'
         }`}
       >
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between gap-3 sm:gap-4">
           {/* Logo / Identity */}
           <a
             href="#overview"
-            className="group flex items-center gap-3 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 rounded-lg"
+            className="group flex items-center gap-2.5 sm:gap-3 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 rounded-lg shrink-0"
           >
-            <div className="relative w-9 h-9 rounded-xl bg-gradient-to-tr from-sky-500 via-indigo-600 to-sky-400 flex items-center justify-center text-white shadow-md shadow-sky-500/25 group-hover:scale-105 transition-all">
+            <div className="relative w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-gradient-to-tr from-sky-500 via-indigo-600 to-sky-400 flex items-center justify-center text-white shadow-md shadow-sky-500/25 group-hover:scale-105 transition-all shrink-0">
               <Terminal className="w-4 h-4 text-white" />
               <span className="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-emerald-400 border-2 border-slate-900 animate-pulse" />
             </div>
             <div className="flex flex-col">
-              <span className={`text-sm font-extrabold tracking-tight transition-colors ${
-                isLight ? 'text-slate-950 group-hover:text-sky-700' : 'text-white group-hover:text-sky-300'
-              }`}>
-                {displayName}
-              </span>
-              <span className={`text-[10px] font-mono tracking-wider font-semibold ${
+              <div className="flex items-center gap-1.5">
+                <span className={`text-xs sm:text-sm font-extrabold tracking-tight transition-colors ${
+                  isLight ? 'text-slate-950 group-hover:text-sky-700' : 'text-white group-hover:text-sky-300'
+                }`}>
+                  {displayName}
+                </span>
+                <span className="hidden sm:inline-block text-[9px] font-mono uppercase px-1.5 py-0.5 rounded border font-bold text-sky-400 border-sky-500/30 bg-sky-500/10">
+                  Accenture
+                </span>
+              </div>
+              <span className={`hidden md:block text-[10px] font-mono tracking-wider font-semibold truncate max-w-[210px] lg:max-w-none ${
                 isLight ? 'text-slate-700' : 'text-slate-400'
               }`}>
-                Java 21 • AWS • React • Microservices Architect
+                Java 21 • AWS Cloud • Microservices
               </span>
             </div>
           </a>
 
-          {/* Desktop Navigation Links */}
-          <nav className={`hidden md:flex items-center gap-1 border px-3 py-1 rounded-full backdrop-blur-md shadow-inner transition-colors ${
+          {/* Desktop Navigation Links (Visible on all desktop viewports lg & xl) */}
+          <nav className={`hidden lg:flex items-center gap-0.5 xl:gap-1 border px-2.5 xl:px-3 py-1 rounded-full shadow-inner transition-colors ${
             isLight
-              ? 'bg-slate-100/90 border-slate-200/90'
-              : 'bg-slate-900/70 border-slate-800/80'
+              ? 'bg-slate-100/90 border-slate-200/90 backdrop-blur-md'
+              : 'bg-[#0e1424] border-slate-800'
           }`}>
             {navLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
-                className={`px-3 py-1.5 text-xs font-mono font-bold rounded-full transition-all focus:outline-none focus-visible:ring-1 focus-visible:ring-sky-400 ${
+                className={`px-2.5 xl:px-3 py-1 xl:py-1.5 text-[11px] xl:text-xs font-mono font-bold rounded-full transition-all focus:outline-none focus-visible:ring-1 focus-visible:ring-sky-400 ${
                   isLight
                     ? 'text-slate-700 hover:text-slate-950 hover:bg-white shadow-sm'
                     : 'text-slate-300 hover:text-white hover:bg-slate-800/80'
@@ -97,17 +102,17 @@ export function Navbar({ profile, onOpenConfigDrawer }: NavbarProps) {
             ))}
           </nav>
 
-          {/* Actions: Theme Toggle + Resume + Config Helper */}
-          <div className="hidden sm:flex items-center gap-2.5">
+          {/* Desktop Actions */}
+          <div className="hidden lg:flex items-center gap-2 shrink-0">
             {/* Theme Toggle Button */}
             <button
               onClick={toggleTheme}
               type="button"
               aria-label={`Switch to ${isLight ? 'dark' : 'light'} theme`}
-              className={`flex items-center justify-center w-9 h-9 rounded-full border transition-all ${
+              className={`flex items-center justify-center w-8.5 h-8.5 rounded-full border transition-all ${
                 isLight
                   ? 'bg-white hover:bg-slate-100 border-slate-300 text-slate-800 shadow-sm hover:scale-105'
-                  : 'bg-slate-900/80 hover:bg-slate-800 border-slate-750 text-amber-300 shadow-inner hover:scale-105'
+                  : 'bg-[#0e1424] hover:bg-[#161f36] border-slate-750 text-amber-300 shadow-md shadow-black/50 hover:scale-105'
               }`}
               title={`Switch to ${isLight ? 'Dark' : 'Light'} Mode`}
             >
@@ -126,10 +131,10 @@ export function Navbar({ profile, onOpenConfigDrawer }: NavbarProps) {
                 rel="noopener noreferrer"
                 title="GitHub Profile (@sameerasha)"
                 aria-label="GitHub Profile"
-                className={`flex items-center justify-center w-9 h-9 rounded-full border transition-all ${
+                className={`flex items-center justify-center w-8.5 h-8.5 rounded-full border transition-all ${
                   isLight
                     ? 'bg-white hover:bg-slate-100 border-slate-300 text-slate-800 hover:text-sky-600 shadow-sm hover:scale-105'
-                    : 'bg-slate-900/80 hover:bg-slate-800 border-slate-750 text-slate-200 hover:text-sky-400 shadow-inner hover:scale-105'
+                    : 'bg-[#0e1424] hover:bg-[#161f36] border-slate-750 text-slate-200 hover:text-sky-400 shadow-md shadow-black/50 hover:scale-105'
                 }`}
               >
                 <GithubIcon className="w-4 h-4" />
@@ -145,7 +150,7 @@ export function Navbar({ profile, onOpenConfigDrawer }: NavbarProps) {
               className={`flex items-center gap-1.5 text-xs font-mono font-semibold px-3 py-1.5 rounded-full border transition-all ${
                 isLight
                   ? 'text-slate-800 hover:text-slate-950 border-slate-300 hover:border-slate-400 bg-white shadow-sm'
-                  : 'text-slate-300 hover:text-white border-slate-800 hover:border-slate-700 bg-slate-900/60'
+                  : 'text-slate-300 hover:text-white border-slate-800 hover:border-slate-700 bg-[#0e1424] hover:bg-[#161f36] shadow-sm shadow-black/40'
               }`}
             >
               <Settings className="w-3.5 h-3.5 text-sky-500" />
@@ -157,10 +162,10 @@ export function Navbar({ profile, onOpenConfigDrawer }: NavbarProps) {
               <a
                 href={profile.resume.url}
                 download={profile.resume.fileName}
-                className="flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-mono font-bold bg-sky-500 hover:bg-sky-400 text-slate-950 transition-all shadow-[0_0_15px_rgba(56,189,248,0.3)] hover:shadow-[0_0_25px_rgba(56,189,248,0.5)]"
+                className="flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono font-bold bg-sky-500 hover:bg-sky-400 text-slate-950 transition-all shadow-[0_0_15px_rgba(56,189,248,0.3)] hover:shadow-[0_0_25px_rgba(56,189,248,0.5)]"
               >
                 <FileText className="w-3.5 h-3.5" />
-                <span>Resume (PDF)</span>
+                <span>Resume</span>
               </a>
             ) : (
               <button
@@ -179,66 +184,74 @@ export function Navbar({ profile, onOpenConfigDrawer }: NavbarProps) {
             )}
           </div>
 
-          {/* Mobile Menu Button + Mobile Theme Toggle */}
-          <div className="flex md:hidden items-center gap-1.5">
+          {/* Mobile / Tablet Compact Action Deck */}
+          <div className="flex lg:hidden items-center gap-2 shrink-0">
+            {/* Theme Toggle Button */}
             <button
               onClick={toggleTheme}
               type="button"
               aria-label="Toggle theme"
-              className={`p-2 rounded-lg border ${
-                isLight ? 'bg-slate-100 border-slate-200 text-slate-700' : 'bg-slate-900 border-slate-800 text-amber-300'
+              className={`flex items-center justify-center w-8.5 h-8.5 rounded-xl border transition-all ${
+                isLight ? 'bg-slate-100 border-slate-200 text-slate-700' : 'bg-[#0e1424] border-slate-800 text-amber-300'
               }`}
             >
               {isLight ? <Moon className="w-4 h-4" /> : <Sun className="w-4 h-4" />}
             </button>
-            <button
-              onClick={onOpenConfigDrawer}
-              type="button"
-              aria-label="Profile configuration"
-              className={`p-2 rounded-lg border ${
-                isLight ? 'bg-white border-slate-200 text-slate-600' : 'border-slate-800 text-slate-400'
-              }`}
-            >
-              <Settings className="w-4 h-4 text-sky-500" />
-            </button>
+
+            {/* Resume Quick Icon on Tablet/Mobile */}
+            {profile.resume.available && profile.resume.url && (
+              <a
+                href={profile.resume.url}
+                download={profile.resume.fileName}
+                aria-label="Download Resume"
+                className="hidden sm:flex items-center justify-center w-8.5 h-8.5 rounded-xl bg-sky-500 text-slate-950 shadow-sm"
+                title="Download Resume"
+              >
+                <FileText className="w-4 h-4" />
+              </a>
+            )}
+
+            {/* Mobile Menu Toggle Button */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               type="button"
               aria-label="Toggle navigation menu"
               aria-expanded={isMobileMenuOpen}
-              className={`p-2 rounded-lg border transition-colors ${
+              className={`flex items-center justify-center w-8.5 h-8.5 rounded-xl border transition-colors ${
                 isLight
-                  ? 'bg-white border-slate-200 text-slate-700 hover:bg-slate-100'
-                  : 'border-slate-800 text-slate-300 hover:text-white hover:bg-slate-800/80'
+                  ? 'bg-white border-slate-200 text-slate-800 hover:bg-slate-100'
+                  : 'bg-[#0e1424] border-slate-800 text-slate-200 hover:text-white hover:bg-[#161f36]'
               }`}
             >
-              {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+              {isMobileMenuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
             </button>
           </div>
         </div>
       </div>
 
-      {/* Mobile Drawer Menu */}
+      {/* Floating Mobile Drawer Menu */}
       {isMobileMenuOpen && (
-        <div className={`md:hidden border-b px-4 pt-3 pb-6 mt-3 space-y-2 backdrop-blur-xl ${
-          isLight ? 'bg-white/95 border-slate-200' : 'bg-slate-950/95 border-slate-800'
+        <div className={`lg:hidden max-w-7xl mx-auto rounded-2xl border p-4 sm:p-5 mt-2.5 shadow-2xl transition-all animate-in fade-in slide-in-from-top-2 duration-200 ${
+          isLight ? 'bg-white/98 border-slate-200 backdrop-blur-xl' : 'bg-[#0d121f] border-slate-800 shadow-2xl shadow-black/90'
         }`}>
-          {navLinks.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              onClick={() => setIsMobileMenuOpen(false)}
-              className={`block px-3 py-2 text-sm font-mono rounded-lg transition-colors ${
-                isLight
-                  ? 'text-slate-700 hover:text-sky-600 hover:bg-slate-100'
-                  : 'text-slate-300 hover:text-sky-400 hover:bg-slate-900/80'
-              }`}
-            >
-              {link.label}
-            </a>
-          ))}
+          <div className="grid grid-cols-2 gap-1.5 mb-3">
+            {navLinks.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                onClick={() => setIsMobileMenuOpen(false)}
+                className={`flex items-center px-3.5 py-2.5 text-xs font-mono font-bold rounded-xl transition-colors ${
+                  isLight
+                    ? 'text-slate-700 hover:text-sky-600 hover:bg-slate-100'
+                    : 'text-slate-300 hover:text-sky-400 hover:bg-[#141b2e]'
+                }`}
+              >
+                {link.label}
+              </a>
+            ))}
+          </div>
 
-          <div className={`pt-4 border-t flex flex-col gap-2 ${
+          <div className={`pt-3 border-t flex flex-col sm:flex-row gap-2 ${
             isLight ? 'border-slate-200' : 'border-slate-800/80'
           }`}>
             {profile.socialLinks.github && (
@@ -247,38 +260,26 @@ export function Navbar({ profile, onOpenConfigDrawer }: NavbarProps) {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setIsMobileMenuOpen(false)}
-                className={`flex items-center justify-center gap-2 w-full py-2.5 rounded-lg text-xs font-mono font-semibold border transition-all ${
+                className={`flex items-center justify-center gap-2 w-full py-2.5 rounded-xl text-xs font-mono font-bold border transition-all ${
                   isLight
                     ? 'bg-slate-100 border-slate-300 text-slate-800 hover:bg-slate-200'
-                    : 'bg-slate-900 border-slate-750 text-slate-200 hover:bg-slate-800'
+                    : 'bg-[#141b2e] border-slate-800 text-slate-200 hover:bg-[#1c263f]'
                 }`}
               >
                 <GithubIcon className="w-4 h-4 text-sky-500" />
-                <span>GitHub Profile (@sameerasha)</span>
+                <span>GitHub (@sameerasha)</span>
               </a>
             )}
 
-            {profile.resume.available && profile.resume.url ? (
+            {profile.resume.available && profile.resume.url && (
               <a
                 href={profile.resume.url}
                 download={profile.resume.fileName}
-                className="flex items-center justify-center gap-2 w-full py-2.5 rounded-lg text-xs font-mono font-semibold bg-sky-500 text-slate-950"
+                className="flex items-center justify-center gap-2 w-full py-2.5 rounded-xl text-xs font-mono font-bold bg-sky-500 text-slate-950"
               >
                 <FileText className="w-4 h-4" />
-                <span>Download Resume</span>
+                <span>Download Resume (PDF)</span>
               </a>
-            ) : (
-              <button
-                onClick={() => {
-                  setIsMobileMenuOpen(false);
-                  onOpenConfigDrawer();
-                }}
-                className={`w-full text-center py-2 text-xs font-mono border border-dashed rounded-lg ${
-                  isLight ? 'text-slate-500 border-slate-300' : 'text-slate-400 border-slate-800'
-                }`}
-              >
-                Resume: Attach in profile.ts
-              </button>
             )}
           </div>
         </div>

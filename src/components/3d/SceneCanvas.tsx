@@ -71,7 +71,6 @@ export function SceneCanvas({
       <WebGLErrorBoundary fallback={<ModelViewerFallback />}>
         <Suspense fallback={<ModelViewerFallback isSkeleton />}>
           <Canvas
-            shadows
             dpr={[1, 1.75]} // Clamps DPR to guarantee 60 FPS
             gl={{
               powerPreference: 'high-performance',
